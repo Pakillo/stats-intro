@@ -175,11 +175,6 @@ hist(age)
 
 ![](images/gaussian.png)
 
-$\overline {x} \pm SD$ enclose **68%** of the data
-
-$\overline {x} \pm 2SD$ enclose **95%** of the data
-
-$\overline {x} \pm 3SD$ enclose **99%** of the data
 
 
 
@@ -209,7 +204,7 @@ par(mfrow = c(1,1))
 
 ## Inference: from samples to population
 
-We rarely measure the whole population, but take samples instead.
+We rarely measure the whole **population**, but take **samples** instead.
 
 ![](images/olivar.png)
 
@@ -218,11 +213,11 @@ We rarely measure the whole population, but take samples instead.
 
 ## What's the average height in this class?
 
-1. Write down your height in a piece of paper and put it in the bag.
+1. Write down your height and place of origin (Sevilla or other) in a piece of paper and put it in the bag.
 
 2. Now everyone **sample** 5 individuals from the whole **population** of heights.
 
-3. Calculate the mean and 95% CI (http://graphpad.com/quickcalcs/CImean1/).
+3. Calculate the mean and 95% CI for your sample (http://graphpad.com/quickcalcs/CImean1/).
 
 4. Draw on blackboard.
 
@@ -297,21 +292,12 @@ blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(heigh
 # Experimental design
 
 
-## Randomization
-
-Evaluating fertilizer effect
+## Eg. Evaluating fertilizer effect
 
 ![](images/olivar-half.png)
 
 
-## Randomization
-
-- Haphazard $\neq$ Random
-
-- Stratify: randomize within groups
-
-
-## Replication
+## Replication!
 
 ![](images/olivar-half.png)
 
@@ -338,9 +324,22 @@ Stopping rules:
 
 
 
+## Randomization
+
+![](images/olivar-half.png)
+
+
+## Randomization
+
+- Haphazard $\neq$ Random
+
+- Stratify: randomize within groups (e.g. species, soil types)
+
+
+
 ## Have controls
 
-- Untreated individuals, plots (assigned randomly, of course).
+- Untreated individuals, plots... (assigned randomly, of course).
 
 - Must differ only in treatment (i.e. homogeneous environment).
 
@@ -364,30 +363,30 @@ Stopping rules:
 # Hypothesis testing
 
 
-## Do foreigners have different heights than local students?
+## Does height differ between local and foreign students?
 
-Heigths in Sevilla:
+- Heigths in Sevilla:
 ```{r echo=FALSE}
-h.sevi <- rnorm(5, 170, 10)
+h.sevi <- round(rnorm(5, 170, 10))
 cat(h.sevi)
 summary(h.sevi)
 ```
 
 
-Other heights:
+- Other heights:
 ```{r echo=FALSE}
-h.out <- rnorm(10, 178, 10)
+h.out <- round(rnorm(10, 178, 10))
 cat(h.out)
 summary(h.out)
 ```
 
 
-We know what happens in **our samples**, but want to extrapolate to the whole **population**.
+- We know what happens in **our samples**, but want to extrapolate to the whole **population**.
 
 
 ## If we sample students' heights in this class...
 
-- can we extrapolate results to
+- Can we extrapolate results to
 
     - this class?
 
@@ -408,6 +407,8 @@ We know what happens in **our samples**, but want to extrapolate to the whole **
 
 ## Null and alternative hypotheses
 
+-
+
 - **Null hypothesis**: heights don't differ. 
 
 - **Alternative hypothesis**: heights are different.
@@ -416,9 +417,23 @@ We know what happens in **our samples**, but want to extrapolate to the whole **
 
 ## **P value**
 
-- Probability of observing data as or more extreme than this *if H0 was true*.
+- 
 
-- Hence **the lower P the more unlikely H0** (i.e. more likely there's a difference).
+- Probability of observing data as or more extreme than these *if H0 was true*.
+
+- Hence **the lower P the more unlikely H0** (i.e. more likely there's a true difference).
+
+
+
+
+## Are differences *significant*?
+
+- If p < 0.05, we **reject** H0.
+
+- If p > 0.05, we **fail to reject** H0
+
+- (which is not the same as 'H0 is true')
+
 
 
 ## Let's do the test
@@ -430,13 +445,7 @@ t.test(h.sevi, h.out)
 **Are heights different then?**
 
 
-## Are differences *significant*?
 
-- If p < 0.05, we **reject** H0.
-
-- If p > 0.05, we **fail to reject** H0
-
-- (which is not the same as 'H0 is true')
 
 
 
@@ -524,17 +533,17 @@ http://dx.doi.org/10.1890/ES13-00160.1
 
 ## News: Hamburgers increase risk of heart attack
 
-In a sample of 10,000 people, it was found that eating >2 hamburgers a week increased heart attacks by 50%.
+- In a sample of 10,000 people, it was found that eating >2 hamburgers a week increased heart attacks by 50%.
 
-**Do hamburgers increase heart attacks?**
+- **Do hamburgers increase heart attacks?**
 
 
 
 ## Bigger flowers increase reproductive success
 
-We found that plants with bigger flowers produced 30% more seeds...
+- We found that plants with bigger flowers produced 30% more seeds...
 
-**Do big flowers increase reproductive success?**
+- **Do big flowers increase reproductive success?**
 
 
 
@@ -548,16 +557,27 @@ http://tylervigen.com/spurious-correlations
 
 ## Statistically significant != biologically important
 
-P-value depends on sample size: with large `n`, everything can be significant.
+- P-value depends on sample size: with large `n`, everything can be significant.
+
+- Trivial difference, big sample size:
 
 ![](images/bigSS.png)
 
 
 ## Statistically significant != biologically important
 
+- Big real difference but low sample size:
+
 ![](images/smallSS.png)
 
-Suggested reading: [significantly misleading](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
+- Suggested reading: [significantly misleading](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
+
+
+
+## Not significant != there is no effect
+
+![](images/CIs.png)
+
 
 
 
@@ -566,9 +586,7 @@ Suggested reading: [significantly misleading](http://www.statslife.org.uk/the-st
 ![](images/CIoverlap.png)
 
 
-## Not significant != there is no effect
 
-![](images/CIs.png)
 
 
 
@@ -634,6 +652,388 @@ http://dx.doi.org/10.1177/0956797613504966
 
 
 
+# Introduction to statistical modelling
+
+
+## Modern statistics are easier than this
+
+![](images/tests_diagram.png)
+
+
+
+
+## Our overarching regression framework 
+
+
+$$
+  \begin{aligned}  
+  y_{i}=a+bx_{i}+\varepsilon _{i} \\  
+  \varepsilon _{i}\sim N\left( 0,\sigma^2 \right) \\  
+  \end{aligned}  
+$$
+
+\begincols
+
+\begincol
+```{r regplot, echo=FALSE, fig.align='left', fig.height=5, fig.width=4}
+data(iris)
+setosa <- iris[iris$Species == "setosa", ]
+plot(setosa[,3], setosa[,4], xlab = "x", ylab = "y", ylim = c(-0.1, 0.65), 
+     pch=19, las = 1, cex.lab = 1.5, xlim = c(0, 2))
+abline(lm(setosa[,4] ~ setosa[,3]), lwd = 3)
+```
+\endcol
+
+\begincol
+
+**Data**  
+*y* = response variable  
+*x* = predictor 
+    
+
+**Parameters**  
+*a* = intercept    
+*b* = slope     
+$\sigma$ = residual variation    
+$\varepsilon$ = residuals  
+
+\endcol
+\endcols
+
+
+## Residual variation (error) 
+
+\begincols
+\begincol
+```{r small_residuals, echo=FALSE, fig.width=4}
+set.seed(123)
+x <- runif(50, 10, 30)
+y <- rnorm(50, 4 + 0.3*x, 0.5)
+plot(x, y, las = 1, main = "small")
+abline(lm(y ~ x), lwd = 3)
+```
+\endcol
+
+\begincol
+```{r large_residuals, echo=FALSE, fig.width=4}
+y2 <- rnorm(50, 4 + 0.3*x, 3)
+plot(x, y2, las = 1, main = "large")
+abline(lm(y2 ~ x), lwd = 3)
+```
+\endcol
+\endcols
+
+
+
+## Residual variation
+
+$$
+  \begin{aligned}  
+  \varepsilon _{i}\sim N\left( 0,\sigma^2 \right) \\  
+  \end{aligned}  
+$$
+
+```{r sigmas, echo=FALSE, fig.align='center'}
+s1 <- density(rnorm(1000, 0, 2))
+s2 <- density(rnorm(1000, 0, 5))
+s3 <- density(rnorm(1000, 0, 10))
+plot(s3, ylim=c(0,0.2), ylab="", xlab="", main="Distribution of residuals", lwd=2, col="red", yaxt="n")
+lines(s2, lwd=2, col="blue")
+lines(s1, lwd=2)
+Hmisc::labcurve(list(s1, s2, s3), labels=paste("sigma = ", c(2,5,10), sep=""), type="l", col=c("black", "blue", "red"))
+```
+
+
+## In a Normal distribution
+
+![](images/gaussian.png)
+
+
+
+# Let's do real data analysis
+
+
+## Q: What is the relationship between petal width and length in *Iris setosa*?
+
+```{r echo=FALSE}
+data(iris)
+setosa <- subset(iris, Species == "setosa")
+head(setosa)
+```
+
+
+
+## Always plot your data first!
+
+
+![](images/anscombe.png)
+
+
+
+
+## Exploratory Data Analysis (EDA)
+
+Outliers
+
+```{r indexplot, fig.height=5, fig.width=4}
+plot(setosa$Petal.Width, main = "Petal width")
+#plot(setosa$Petal.Length, main = "Petal length")
+```
+
+
+
+
+## Outliers impact on regression
+
+![](images/reg_outliers.png)
+
+See http://rpsychologist.com/d3/correlation/
+
+
+## Histogram
+
+```{r histog}
+hist(setosa$Petal.Length, main = "Petal length")
+```
+
+
+## Scatterplot
+
+```{r scatterplot}
+plot(setosa$Petal.Width, setosa$Petal.Length, las = 1)
+```
+
+
+## Now fit model
+
+```{r lm_iris}
+m1 <- lm(Petal.Length ~ Petal.Width, data = setosa)
+```
+
+
+
+## What does this mean?
+
+```{r summary_lm, echo=FALSE}
+summary(m1)
+```
+
+
+## Plot effects
+
+```{r echo = TRUE}
+library(effects)
+plot(allEffects(m1))
+```
+
+
+## Plot model (visreg)
+
+```{r visreg}
+library(visreg)
+visreg(m1)
+```
+
+
+## Linear model assumptions
+
+- Linearity (transformations, GAM...)
+  
+- Residuals:
+    - Independent
+    - Equal variance
+    - Normal
+
+- No measurement error in predictors
+
+
+
+## Model checking: residuals
+
+```{r plot_lm, echo=FALSE}
+def.par <- par(no.readonly = TRUE)
+layout(matrix(1:4, nrow=2))
+plot(m1)
+par(def.par)
+```
+
+
+## Are residuals normal? 
+
+\begincols
+
+\begincol
+```{r resid_hist, echo=TRUE, fig.width=5, fig.height=3}
+hist(resid(m1))
+```
+\endcol
+
+\begincol
+```{r coefs_m1, echo=FALSE}
+arm::display(m1)
+```
+\endcol
+
+\endcols
+  
+    
+SD of residuals = `r round(sd(resid(m1)), digits=2)` coincides with estimate of `sigma`.
+
+
+
+## How good is the model in predicting petal length?
+
+Observed vs Predicted values: use `fitted`.
+
+```{r obs_pred, fig.width=3, fig.height=3, echo=1}
+plot(setosa$Petal.Length, fitted(m1), xlab = "Petal length - observed", ylab = "Petal length - predicted", las = 1, xlim = c(1,2), ylim = c(1,2))
+abline(a = 0, b = 1)
+```
+
+Concordant with low R-squared!
+
+
+## Using fitted model for prediction
+
+Q: Expected petal length if width = 0.39?
+
+
+## Using fitted model for prediction
+
+Q: Expected petal length if width = 0.39?
+
+```{r}
+predict(m1, data.frame(Petal.Width = c(0.39)), se.fit = TRUE)
+```
+
+
+
+
+## Important functions
+
+- `plot`
+
+- `summary`
+
+- `coef`
+
+- `confint`
+
+- `fitted`
+
+- `resid`
+
+- `predict`
+
+
+
+
+
+
+
+
+# Categorical predictors (factors)
+
+
+## Q: Does petal length vary among *Iris* species?
+
+First, a plot:
+
+```{r boxplot}
+plot(Petal.Length ~ Species, data = iris)
+```
+
+
+
+## Linear model with categorical predictors
+
+$$
+  \begin{aligned} 
+  y_{i}=a+bx_{i}+\varepsilon _{i} \\  
+  y_{i}=a+b_{versicolor}+c_{virginica}+\varepsilon _{i} \\     
+  \end{aligned} 
+$$
+
+
+
+## Model
+
+```{r lm_categ, echo=1}
+m2 <- lm(Petal.Length ~ Species, data = iris)
+summary(m2)
+```
+
+
+
+
+## Alternatively, no intercept
+
+```{r lm_categ_nointercep, echo=1}
+m3 <- lm(Petal.Length ~ Species - 1, data = iris)
+summary(m3)
+```
+
+
+## Petal length differences across 3 _Iris_ species
+
+```{r iris_plot}
+visreg(m3)
+```
+
+
+## Are differences statistically significant?
+
+Compare CIs
+
+```{r}
+summary(allEffects(m3))
+```
+
+
+## Plotting effects
+
+```{r}
+plot(allEffects(m3))
+```
+
+
+
+# Does height differ between local and foreign students?
+
+
+
+
+
+
+
+
+
+
+
+# Combining continuous and categorical predictors
+
+
+## Predicting *Iris* petal length according to species and petal width
+
+$$
+  \begin{aligned} 
+  y_{i}=a+bx_{i}+\varepsilon _{i} \\  
+  y_{i}=a+b_{versicolor}+c_{virginica}+\varepsilon _{i} \\   
+  y_{i}=a+b_{versicolor}+c_{virginica}+ d \cdot PetalWidth_{i} + \varepsilon _{i} \\   
+  \end{aligned} 
+$$
+
+
+## Predicting *Iris* petal length according to species and petal width
+
+
+```{r echo = FALSE}
+multreg <- lm(Petal.Length ~ Species + Petal.Width, data = iris)
+summary(multreg)
+```
+
+
+
 
 
 
@@ -649,11 +1049,7 @@ http://dx.doi.org/10.1177/0956797613504966
 Bolker 2008
 
 
-## Does height differ between local-foreigners?
 
-lm(height ~ sex)
-
-CI of the difference
 
 
 
@@ -677,7 +1073,7 @@ CI of the difference
   
   
   
-#### INSERT LM-GLM-GLMM STUFF HERE ####
+
   
   
   
@@ -702,7 +1098,7 @@ CI of the difference
 
 - *Non-nested models*: compare fit of different models (e.g. alternative hypotheses)
 
-  - But building larger model might be better than choosing any of them!
+    - But building larger model might be better than choosing any of them!
 
 
 
@@ -720,7 +1116,7 @@ y <- rnorm(10, 2 + 0.2*x, 0.3)
 ```
 
 
-```{r linreg, echo=FALSE, fig.height=4, fig.width=4}
+```{r linreg, echo=FALSE, fig.height=4, fig.width=4, eval = FALSE}
 m1 <- lm(y~x)
 plot(x,y, las=1, pch=19, main="Simple linear regression")
 abline(m1, lwd=2, col="red")
@@ -802,7 +1198,7 @@ Random forests (overfit)
     * AIC
     * BIC
     * DIC
-    * WAIC
+    * WAIC...
 
 - All these attempt an impossible task: 
       * estimating out-of-sample prediction error without external data or further model fits!
@@ -811,69 +1207,54 @@ Random forests (overfit)
 
 
 
-
-
-
-
-
-
-
-
 ## AIC
 
 ![](images/AIC.PNG)
 
-> * First term: model fit (deviance, log likelihood)
+* First term: model fit (deviance, log likelihood)
 
-> * k: number of estimated parameters (penalisation for model complexity)
+* k: number of estimated parameters (penalisation for model complexity)
 
-> * AIC biased towards complex models.
+* AIC biased towards complex models.
 
-> * AICc recommended with 'small' sample sizes (n/p < 40). But see [Richards 2005 Ecology](http://www.esajournals.org/doi/pdf/10.1890/05-0074).
+* AICc recommended with 'small' sample sizes (n/p < 40). But see [Richards 2005 Ecology](http://www.esajournals.org/doi/pdf/10.1890/05-0074).
 
-> * Doesn't work with hierarchical models or informative priors!
+* Doesn't work with hierarchical models or informative priors!
 
 
 
 
 ## Problems of IC
 
-> * No information criteria is panacea: all have problems (see refs at the end).
+* No information criteria is panacea: all have problems.
 
-> * They give average out-of-sample prediction error, but prediction errors can differ substantially within the same dataset (e.g. populations, species).
+* They give average out-of-sample prediction error, but prediction errors can differ substantially within the same dataset (e.g. populations, species).
 
-> * Sometimes better models rank poorly (Gelman et al. 2013). So, combine with thorough model checks.
+* Sometimes better models rank poorly (Gelman et al. 2013). So, combine with thorough model checks.
 
 
 
-## So which variables should enter my model?
+# So which variables should enter my model?
 
-> * Choose variables based on **ecological understanding**, rather than throwing plenty of them in a fishing expedition.
 
-> * Propose single global model or small set (< 10 - 20) of **reasonable** candidate models.
+## Choosing predictors
 
-> * Number of variables balanced with sample size (at least 10 - 30 obs per param)
+* Choose variables based on **ecological understanding**, rather than throwing plenty of them in a fishing expedition.
 
-> * Assess collinearity between predictors (Dormann et al 2013)
->    * pairs() or similar
->    * If |r| > 0.5 - 0.7, consider leaving one variable out, but keep it in mind when interpreting model results.
->    * Or combine 2 or more in a synthetic variable (e.g. water deficit ~ Temp + Precip).
->    * Many methods available, e.g. sequential, ridge regression... (see Dormann et al)
->    * Measurement error can seriously complicate things (Biggs et al 2009; Freckleton 2011)
+* Propose single global model or small set (< 10 - 20) of **reasonable** candidate models.
+
+* Number of variables balanced with sample size (at least 10 - 30 obs per param)
+
+* Assess collinearity between predictors (Dormann et al 2013)
+    * pairs() or similar
+    * If |r| > 0.5 - 0.7, consider leaving one variable out, but keep it in mind when interpreting model results.
+    * Or combine 2 or more in a synthetic variable (e.g. water deficit ~ Temp + Precip).
+    * Many methods available, e.g. sequential, ridge regression... (see Dormann et al)
+    * Measurement error can seriously complicate things (Biggs et al 2009; Freckleton 2011)
     
-> * For predictors with large effects, consider interactions.
+* For predictors with large effects, consider interactions.
     
-> * See also Zuur et al 2010.
-
-
-
-
-
-
-
-
-
-
+* See also Zuur et al 2010.
 
 
 
@@ -885,11 +1266,11 @@ Random forests (overfit)
 
 ## Do not use stepwise regression
 
-> * Whittingham et al. (2006) Why do we still use stepwise modelling in ecology and behaviour? J. Animal Ecology.
+* Whittingham et al. (2006) Why do we still use stepwise modelling in ecology and behaviour? J. Animal Ecology.
 
-> * Mundry & Nunn (2009) Stepwise Model Fitting and Statistical Inference: Turning Noise into Signal Pollution. Am Nat.
+* Mundry & Nunn (2009) Stepwise Model Fitting and Statistical Inference: Turning Noise into Signal Pollution. Am Nat.
 
-> * This includes stepAIC (e.g. Dahlgren 2010; Burnham et al 2011; Hegyi & Garamszegi 2011).
+* This includes stepAIC (e.g. Dahlgren 2010; Burnham et al 2011; Hegyi & Garamszegi 2011).
 
 
 
@@ -898,13 +1279,13 @@ Random forests (overfit)
 (assuming only potentially relevant predictors have been selected a priori)
 
 
-> * NOT significant + expected sign = let it be.
+* NOT significant + expected sign = let it be.
 
-> * NOT significant + NOT expected sign = remove it.
+* NOT significant + NOT expected sign = remove it.
 
-> * Significant + NOT expected sign = check… confounding variables?
+* Significant + NOT expected sign = check… confounding variables?
 
-> * Significant + expected sign = keep it!
+* Significant + expected sign = keep it!
 
 
 
@@ -915,22 +1296,22 @@ Random forests (overfit)
 
 ## Summary
 
-> 1. Choose meaningful variables
-  + Beware collinearity
-  + Keep good n/p ratio
+1. Choose meaningful variables
+    + Beware collinearity
+    + Keep good n/p ratio
 
-> 2. Generate global model or (small) set of candidate models
-  + Avoid stepwise and all-subsets
-  + Don't assume linear effects: think about appropriate functional relationships
-  + Consider interactions for strong main effects
+2. Generate global model or (small) set of candidate models
+    + Avoid stepwise and all-subsets
+    + Don't assume linear effects: think about appropriate functional relationships
+    + Consider interactions for strong main effects
   
-> 3. If > 1 model have similar support, consider model averaging.
+3. If > 1 model have similar support, consider model averaging (or blending).
 
-> 4. Always check thoroughly fitted models
-  + Residuals, goodness of fit...
-  + Plot. Check models. Plot. Check assumptions. Plot. (Lavine 2014).
+4. Always check thoroughly fitted models
+    + Residuals, goodness of fit...
+    + Plot. Check models. Plot. Check assumptions. Plot. (Lavine 2014).
   
-> 5. Move away of statistical significance -> effect sizes, type M and S errors...
+5. Always report effect sizes
 
 
 
