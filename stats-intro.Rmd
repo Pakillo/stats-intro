@@ -796,7 +796,7 @@ m1 <- lm(Petal.Length ~ Petal.Width, data = setosa)
 
 
 
-## What does this mean? (everything, not just the stars!)
+## What does this mean? 
 
 ```{r summary_lm, echo=FALSE}
 summary(m1)
@@ -807,7 +807,7 @@ summary(m1)
 ## Plot model (visreg)
 
 ```{r echo = 2}
-library(visreg)
+library(visreg)    
 visreg(m1)
 ```
 
