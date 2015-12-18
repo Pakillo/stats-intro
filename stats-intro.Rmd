@@ -134,7 +134,7 @@ hist(age)
 
 \begincol
 
-- **Central tendency**
+- **Central tendency / location**
 
     - mean
 
@@ -143,7 +143,7 @@ hist(age)
     - mode
 
 
-- **Variation**
+- **Variation / Spread**
 
     - min, max, range
 
@@ -242,7 +242,7 @@ We rarely measure the whole **population**, but take **samples** instead.
 
 ## What happens if we increase sample size?
 
-- CI width decreases...
+- CI width *decreases*...
 
 - but still 5% of CIs will NOT contain true mean!
 
@@ -257,15 +257,15 @@ We rarely measure the whole **population**, but take **samples** instead.
 
 
 
-## Bayesian inference: prior, posterior, and Bayes' theorem
+## Bayesian inference: prior, posterior, and likelihood
 
 $Posterior \propto Likelihood x Prior$
 
 ```{r echo = FALSE}
 
-height <- runif(10, 160, 190)
+height <- runif(10, 160, 180)
 
-prior.height <- 170
+prior.height <- 180
 prior.height.var <- 20
 
 library(blmeco)
@@ -292,7 +292,7 @@ blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(heigh
 # Experimental design
 
 
-## Eg. Evaluating fertilizer effect
+## How would you evaluate fertilizer effect?
 
 ![](images/olivar-half.png)
 
@@ -304,19 +304,21 @@ blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(heigh
 
 ## Replication
 
-- Determine sample size *a priori* according to wanted precision of estimates (power analysis).
+- Replication is key: we need several samples.
+
+- How many? Determine `n` *a priori* according to wanted precision of estimates (*power analysis*).
 
 - Traditionally, ecology studies have had too low sample sizes. 
 
 - Hence missing many subtle effects, and prone to bias.
 
-- Complex models (w/ interactions etc) require **high** sample sizes.
+- Complex models (w/ many predictors, interactions etc) require **high** sample sizes.
 
 
 ## Sample size is very important
 
 
-See [The evolution of correlations](http://vimeo.com/57127001)
+See [*The evolution of correlations*](http://vimeo.com/57127001)
 
 Stopping rules:
 
@@ -365,7 +367,7 @@ Stopping rules:
 
 ## Does height differ between local and foreign students?
 
-- Heigths in Sevilla:
+- Local people heigths:
 ```{r echo=FALSE}
 h.sevi <- round(rnorm(5, 170, 10))
 cat(h.sevi)
@@ -407,7 +409,7 @@ summary(h.out)
 
 ## Null and alternative hypotheses
 
--
+- Tell me...
 
 - **Null hypothesis**: heights don't differ. 
 
@@ -417,7 +419,7 @@ summary(h.out)
 
 ## **P value**
 
-- 
+- ...
 
 - Probability of observing data as or more extreme than these *if H0 was true*.
 
@@ -432,7 +434,7 @@ summary(h.out)
 
 - If p > 0.05, we **fail to reject** H0
 
-- (which is not the same as 'H0 is true')
+- (which is **not** the same as 'H0 is true')
 
 
 
@@ -505,6 +507,7 @@ http://rpsychologist.com/d3/correlation/
 
 http://dx.doi.org/10.1890/ES13-00160.1
 
+Also http://www.statisticsdonewrong.com/
 
 
 ## First things first
@@ -533,7 +536,7 @@ http://dx.doi.org/10.1890/ES13-00160.1
 
 ## News: Hamburgers increase risk of heart attack
 
-- In a sample of 10,000 people, it was found that eating >2 hamburgers a week increased heart attacks by 50%.
+- In a sample of 10,000 people, it was found that people eating >2 hamburgers a week had 50% higher probability of heart attack.
 
 - **Do hamburgers increase heart attacks?**
 
@@ -541,7 +544,7 @@ http://dx.doi.org/10.1890/ES13-00160.1
 
 ## Bigger flowers increase reproductive success
 
-- We found that plants with bigger flowers produced 30% more seeds...
+- We found that plants with big flowers produced 30% more seeds...
 
 - **Do big flowers increase reproductive success?**
 
@@ -555,9 +558,9 @@ http://tylervigen.com/spurious-correlations
 
 
 
-## Statistically significant != biologically important
+## P-value depends on sample size
 
-- Big real difference but low sample size:
+- Same real difference is detected as significant or not depending on sample size:
 
 ![](images/smallSS.png)
 
@@ -566,23 +569,25 @@ http://tylervigen.com/spurious-correlations
 
 ## Statistically significant != biologically important
 
-- Trivial difference, big sample size:
+- With big sample size, we can find **highly significant but biologically unimportant** differences.
 
 ![](images/bigSS.png)
 
 
 ## Statistically significant != biologically important
 
-- P-value depends on sample size: with large `n`, everything can be significant.
+- Beyond significance, look at *effect sizes*.
 
-- Suggested reading: [significantly misleading](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
+- Suggested reading: [*significantly misleading*](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
 
 
 
-## Not significant != there is no effect
+## 'Not significant' does NOT mean 'there is no effect'
 
 ![](images/CIs.png)
 
+
+- Absence of evidence != Evidence of absence
 
 
 
@@ -618,6 +623,8 @@ http://dx.doi.org/10.1198/000313006X152649
 4. Test different conditions (e.g. different levels of a factor) and report the ones you like.
 
 - To read more: [Simmons et al 2011](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1850704)
+
+- NB: This is ironic!
 
 
 
@@ -655,6 +662,13 @@ http://dx.doi.org/10.1177/0956797613504966
 
 
 # Introduction to statistical modelling
+
+
+----
+
+> **The purpose of models is not to fit data but to sharpen thinking**
+
+Sam Karlin
 
 
 ## Modern statistics are easier than this
@@ -1066,11 +1080,7 @@ hist(resid(m5))
     + See [`family`](http://www.rdocumentation.org/packages/stats/functions/family).
 
 
-## The modelling process
 
-![](images/modeling_process.png)
-
-Bolker 2008
 
 
 
@@ -1097,77 +1107,8 @@ $$
   
 
 
-## Back to survival of Titanic passengers 
 
-How many passengers travelled in each class?
-
-
-## Back to survival of Titanic passengers 
-
-How many passengers travelled in each class?
-```{r}
-tapply(titanic$survived, titanic$class, length)
-```
-
-
-## Back to survival of Titanic passengers 
-
-How many passengers travelled in each class?
-```{r}
-tapply(titanic$survived, titanic$class, length)
-```
-
-How many survived?
-
-
-## Back to survival of Titanic passengers 
-
-How many passengers travelled in each class?
-```{r}
-tapply(titanic$survived, titanic$class, length)
-```
-
-How many survived?
-```{r}
-tapply(titanic$survived, titanic$class, sum)
-```
-
-
-
-
-
-## Back to survival of Titanic passengers 
-
-How many passengers travelled in each class?
-```{r}
-tapply(titanic$survived, titanic$class, length)
-```
-
-How many survived?
-```{r}
-tapply(titanic$survived, titanic$class, sum)
-```
-
-What proportion survived in each class?
-```{r}
-as.numeric(tapply(titanic$survived, titanic$class, mean))
-```
-
-
-## Back to survival of Titanic passengers (dplyr)
-
-Passenger survival according to class
-```{r titanic_dplyr}
-library(dplyr)
-titanic %>%
-  group_by(class, survived) %>%
-  summarise(count = n())
-```
-
-Or `summarise(group_by(titanic, class, survived), count = n())`
-
-
-## Or graphically...
+## Back to survival of Titanic passengers
 
 ```{r titanic_eda}
 plot(factor(survived) ~ class, data = titanic)
@@ -1535,34 +1476,6 @@ Whenever you fit logistic regression to **proportion** data, check family `quasi
 
 
 
-## Think about the shape of relationships
-
-y ~ x + z
-
-Really? Not everything has to be linear! Actually, it often is not.
-
-**Think** about shape of relationship. See chapter 3 in Bolker's book.
-
-
-\begincols
-
-\begincol
-
-```{r echo=FALSE}
-curve(0.7 + 0.3*x, ylab="y", las=1)
-```
-
-\endcol
-
-\begincol
-
-```{r echo=FALSE}
-curve(0.7*x^0.3, ylab="y", las=1)
-```
-
-\endcol
-
-\endcols
 
 
 
@@ -1610,13 +1523,6 @@ seedl <- read.csv("data-raw/seedlings.csv")
 summary(seedl)
 ```
 
-
-## EDA
-
-```{r poisson_eda, fig.height=2, fig.width=2}
-table(seedl$count)
-hist(seedl$count)
-```
 
 
 ## Q: Relationship between Nseedlings and light?
@@ -1859,82 +1765,11 @@ plot(mixed)
 
 
 
-# Multilevel logistic regression
-
-
-## Q: Relationship between tree size and mortality
-
-```{r}
-plot(dead ~ dbh, data = trees)
-```
-
-
-
-## Q: Relationship between tree size and mortality
-
-```{r}
-plot(factor(dead) ~ dbh, data = trees)
-```
-
-## Fit simple logistic regression
-
-```{r, echo=1}
-simple.logis <- glm(dead ~ dbh, data = trees, family=binomial)
-summary(simple.logis)
-```
-
-
-## Fit simple logistic regression (with plots)
-
-```{r, echo=1}
-logis2 <- glm(dead ~ dbh + factor(plot), data = trees, family=binomial)
-summary(logis2)
-```
-
-
-## Fit multilevel logistic regression
-
-```{r mixed_logis, echo=1}
-mixed.logis <- glmer(dead ~ dbh + (1|plot), data=trees, family = binomial)
-summary(mixed.logis)
-```
-
-
-
-## Retrieve model coefficients
-
-```{r mixedlogis_coefs}
-coef(mixed.logis)
-```
-
-
-
-## Visualising model: `allEffects`
-
-\begincols
-\begincol
-```{r mixedlogis_vis1, echo=FALSE}
-allEffects(mixed.logis)
-```
-\endcol
-
-\begincol
-```{r mixedlogis_vis2, echo=FALSE, fig.height=5, fig.width=4}
-plot(allEffects(mixed.logis))
-```
-\endcol
-\endcols
 
 
 
 
-
-
-
-
-
-
-# MODEL SELECTION
+# Model selection
 
 
 ## Why model selection?
@@ -2102,6 +1937,34 @@ Random forests (overfit)
 * See also Zuur et al 2010.
 
 
+## Think about the shape of relationships
+
+y ~ x + z
+
+Really? Not everything has to be linear! Actually, it often is not.
+
+**Think** about shape of relationship. See chapter 3 in Bolker's book.
+
+
+\begincols
+
+\begincol
+
+```{r echo=FALSE}
+curve(0.7 + 0.3*x, ylab="y", las=1)
+```
+
+\endcol
+
+\begincol
+
+```{r echo=FALSE}
+curve(0.7*x^0.3, ylab="y", las=1)
+```
+
+\endcol
+
+\endcols
 
 
 
@@ -2134,7 +1997,11 @@ Random forests (overfit)
 
 
 
+## The modelling process
 
+![](images/modeling_process.png)
+
+Bolker 2008
 
 
 
