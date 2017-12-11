@@ -1,0 +1,111 @@
+---
+title: "Why statistics?"
+output:
+  beamer_presentation:
+    incremental: yes
+header-includes:
+  - \def\begincols{\begin{columns}[c]}
+  - \def\endcols{\end{columns}}
+  - \def\begincol{\begin{column}{0.48\textwidth}}
+  - \def\endcol{\end{column}} 
+  - \setlength{\emergencystretch}{0em}
+  - \setlength{\parskip}{0pt}
+fontsize: 10pt
+---
+
+
+```{r include=FALSE, cache=FALSE}
+
+library(rmarkdown)
+library(knitr)
+
+### Chunk options ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+## Code decoration
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+
+# ## Cache
+opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+
+# ## Plots
+opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+
+
+```
+
+
+
+## To answer questions like...
+
+- what's the probability that something occurs?
+
+- does X influence Y? How much?
+
+
+
+## To ensure correct inferences
+
+![](images/data-nature.png) 
+
+
+## To get answers to tough problems
+
+For example...
+
+
+----
+
+![](images/forest.png)
+
+
+## Inferring tree fecundity
+
+![](images/treefecundity.png)
+
+
+
+
+
+
+## Course goals
+
+- **Understand** statistical inference
+
+- Avoid **misconceptions**
+
+- Promote **good practices**
+
+
+----
+
+> **The purpose of models is not to fit data but to sharpen thinking**
+
+Sam Karlin
+
+
+
+## Topics
+
+- Descriptive statistics
+
+- Graphics
+
+- Sampling
+
+- Experimental design
+
+- Hypothesis testing
+
+- Bayesian inference
+
+- Linear models & GLMs
+
+- Model selection
+
+
+
+
+

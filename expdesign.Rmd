@@ -1,0 +1,113 @@
+---
+title: "Experimental design"
+output:
+  beamer_presentation:
+    incremental: yes
+header-includes:
+  - \def\begincols{\begin{columns}[c]}
+  - \def\endcols{\end{columns}}
+  - \def\begincol{\begin{column}{0.48\textwidth}}
+  - \def\endcol{\end{column}} 
+  - \setlength{\emergencystretch}{0em}
+  - \setlength{\parskip}{0pt}
+fontsize: 10pt
+---
+
+
+```{r include=FALSE, cache=FALSE}
+
+library(rmarkdown)
+library(knitr)
+
+### Chunk options ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+## Code decoration
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+
+# ## Cache
+opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+
+# ## Plots
+opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+
+
+```
+
+
+## How would you evaluate fertilizer effect?
+
+Discuss with partner (5')
+
+![](images/olivar-half.png)
+
+
+## Replication!
+
+![](images/olivar-half.png)
+
+
+## Replication
+
+- Replication is key: we need several samples.
+
+- How many? As much as you can! See [Gelman & Carlin 2014](https://doi.org/10.1177/1745691614551642).
+
+- Traditionally, ecology studies have had too low sample sizes. 
+
+- Hence missing many subtle effects, and [prone to bias](http://science.sciencemag.org/content/355/6325/584.summary).
+
+- Complex models (w/ many predictors, interactions etc) require **high** sample sizes.
+
+
+## Sample size is very important
+
+
+See [*The evolution of correlations*](http://vimeo.com/57127001)
+
+Stopping rules:
+
+![](images/ssize-pvalue.png)
+
+
+
+## Randomization
+
+![](images/olivar-half.png)
+
+
+## Randomization
+
+- Haphazard $\neq$ Random
+
+- Stratify: randomize within groups (e.g. species, soil types)
+
+
+
+## Have controls
+
+- Untreated individuals, plots... (assigned randomly, of course).
+
+- Must differ only in treatment (i.e. homogeneous environment).
+
+- Measure before & after treatment.
+
+- Consider blind designs to avoid observer bias.
+
+
+## To read more
+
+- [Ruxton & Colegrave. Experimental Design for the Life Sciences. OUP](http://global.oup.com/ukhe/product/experimental-design-for-the-life-sciences-9780198717355?cc=es&lang=en&)
+
+
+
+
+
+
+
+
+
+
+

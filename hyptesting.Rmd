@@ -1,0 +1,415 @@
+---
+title: "Hypothesis testing"
+output:
+  beamer_presentation:
+    fig_height: 4
+    fig_width: 5
+    incremental: yes
+header-includes:
+  - \def\begincols{\begin{columns}[c]}
+  - \def\endcols{\end{columns}}
+  - \def\begincol{\begin{column}{0.48\textwidth}}
+  - \def\endcol{\end{column}} 
+  - \setlength{\emergencystretch}{0em}
+  - \setlength{\parskip}{0pt}
+fontsize: 10pt
+---
+
+
+```{r include=FALSE, cache=FALSE}
+
+library(rmarkdown)
+library(knitr)
+
+### Chunk options ###
+
+## Text results
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+## Code decoration
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+
+# ## Cache
+opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+
+# ## Plots
+opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+
+
+```
+
+
+
+# NHST concepts
+
+
+## Null and alternative hypotheses
+
+- Tell me...
+
+- **Null hypothesis**: there is no difference between groups. 
+
+- **Alternative hypothesis**: groups are different.
+
+
+
+## **P value**
+
+- Tell me...
+
+- Very complicated concept: even statisticians fail to describe it well.
+
+- Probability of observing data as or more extreme than these *if H0 was true*.
+
+- Low P-value: data unlikely if H0 was true.
+
+- Large P-value: data not unusual if H0 was true.
+
+
+
+
+## Are differences *significant*?
+
+- If p < 0.05, we **reject** H0.
+
+- If p > 0.05, we **fail to reject** H0
+
+- (which is **NOT** the same as 'H0 is true')
+
+- **CAUTION:**
+
+- This is **very widespread, but incorrect** practice.
+
+- P-value is continuous. We must **avoid binary decisions** based on **arbitrary thresholds**.
+
+- More on this later.
+
+
+
+## Let's do the test
+
+```{r echo=FALSE}
+h.sevi <- round(rnorm(5, 170, 10))
+h.out <- round(rnorm(10, 178, 10))
+```
+
+```{r echo = TRUE}
+t.test(h.sevi, h.out)
+```
+
+**Are heights different then?**
+
+
+
+
+
+
+
+## Rejecting hypotheses: two types of error
+
+![](images/pregnant.jpg)
+
+
+
+## Rejecting hypotheses: two types of error
+
+![](images/staterrors.png)
+
+ 
+**Power**: Probability of detecting true difference (rejecting H0 when it's false).
+
+
+
+
+
+
+## Understanding NHST
+
+http://rpsychologist.com/d3/NHST/
+
+
+
+## Example: biased coin
+
+```{r coin, echo = 4}
+ntrials <- 10
+coin <- rbinom(ntrials, 1, 0.6)
+coin
+
+test <- prop.test(sum(coin), ntrials)
+test
+```
+
+
+
+
+
+## Correlation between variables
+
+http://rpsychologist.com/d3/correlation/
+
+
+
+
+# Common pitfalls and good practice
+
+## A must read
+
+```{r out.height='3in', out.width='4in'}
+include_graphics("images/Greenland.PNG")
+```
+
+https://doi.org/10.1007/s10654-016-0149-3
+
+
+
+## Good reading
+
+![](images/steel_paper.png)
+
+http://dx.doi.org/10.1890/ES13-00160.1
+
+Also http://www.statisticsdonewrong.com/
+
+
+
+
+## First things first
+
+- Always 
+
+- Always 
+
+- Always
+
+
+
+## Plot data and models
+
+![](images/anscombe.png)
+
+
+## Don't use statistics blindly: *Visualise*
+
+```{r}
+include_graphics("images/correlations.png")
+```
+
+https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
+
+
+
+## Don't use statistics blindly: *Visualise*
+
+```{r}
+include_graphics("images/correlations2.png")
+```
+
+https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
+
+
+
+## Don't use statistics blindly: *Visualise*
+
+```{r}
+include_graphics("images/correlations3.png")
+```
+
+https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
+
+
+
+----
+
+> **Plot. Check models. Plot. Check assumptions. Plot.**
+
+[Lavine 2014 *Ecology*](http://dx.doi.org/10.1890/13-1112.1)
+
+
+
+
+
+
+
+
+## News: Hamburgers increase risk of heart attack
+
+- In a sample of 10,000 people, it was found that people eating >2 hamburgers a week had 20% higher probability of heart attack.
+
+- **Do hamburgers increase heart attacks?**
+
+- https://pollev.com/franciscorod726
+
+
+
+## Bigger flowers increase reproductive success
+
+- We found that plants with big flowers produced 30% more seeds...
+
+- **Do big flowers increase reproductive success?**
+
+- https://pollev.com/franciscorod726
+
+
+
+## Correlation vs Causation
+
+![](images/spurious-corr-margarine.png)
+
+http://tylervigen.com/spurious-correlations
+
+
+## Learning statistics through xkcd
+
+```{r out.height='3in', out.width='4in'}
+include_graphics("images/xkcd_correlation.png")
+```
+
+
+
+
+## P-value depends on sample size
+
+- Same real difference is detected as significant or not depending on sample size:
+
+![](images/smallSS.png)
+
+
+## P-value depends on sample size
+
+```{r}
+include_graphics("images/pvalue_SS_Motulski.jpg")
+```
+
+http://dx.doi.org/10.1002/prp2.93
+
+
+## Statistically significant != biologically important
+
+- With big sample size, we can find **highly significant but biologically unimportant** differences.
+
+![](images/bigSS.png)
+
+
+## Statistically significant != biologically important
+
+- Statistically significant = unlikely to be zero
+
+- Suggestion: Try to avoid 'significant' all together
+
+- Suggested reading: [*significantly misleading*](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
+
+- Beyond significance, look at *effect sizes*.
+
+
+
+
+
+## 'Not significant' does NOT mean 'there is no effect'
+
+![](images/CIs.png)
+
+
+- **Absence of evidence != Evidence of absence**
+
+
+
+## Failure to reject H0 != H0 is true
+
+![](images/CIoverlap.png)
+
+
+
+
+## 0.05 is an arbitrary threshold
+
+![](images/gelman_signif.png)
+
+http://dx.doi.org/10.1198/000313006X152649
+
+
+
+## Multiple hypothesis testing
+
+![](images/xkcd_testing.png)
+
+
+## How to make your results significant: *p-hacking*
+
+```{r out.height='3in', out.width='5in'}
+include_graphics("images/phacking_Motulski.jpg")
+```
+
+http://dx.doi.org/10.1002/prp2.93
+
+
+## How to make your results significant: *p-hacking*
+
+1. Test multiple variables, then report the ones that are significant.
+
+2. Artificially choose when to end your experiment.
+
+3. Add covariates until effects are significant.
+
+4. Test different conditions (e.g. different levels of a factor) and report the ones you like.
+
+- To read more: [Simmons et al 2011](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1850704)
+
+
+## How to make your results significant: *p-hacking*
+
+https://www.youtube.com/watch?v=ZaNtz76dNSI
+
+
+
+## ASA statement on p-values
+
+- P-values do not measure the **probability of hypothesis** being true, or the probability that the data were produced by **random chance** alone.
+
+- Scientific conclusions or policy decisions should NOT be based only on **whether a
+p-value passes a specific threshold**.
+
+- P-value, or statistical significance, does not measure the **size of an effect** or the **importance** of a result.
+
+- By itself, a p-value does NOT provide a good **measure of evidence** regarding a model or hypothesis.
+
+
+https://doi.org/10.1080/00031305.2016.1154108
+
+
+
+
+
+## The New Statistics
+
+Aim for estimation of effects and their uncertainty.
+
+![](images/cumming.png)
+
+http://dx.doi.org/10.1177/0956797613504966
+
+
+
+## How many types of errors?
+
+- **Type I**: False positive (incorrect rejection of null hypothesis).
+
+- **Type II**: False negative (failure to reject false null hypothesis).
+
+- **Type S (Sign)**: estimating effect in opposite direction.
+
+- **Type M (Magnitude)**: Misestimating magnitude of the effect (under or overestimating).
+
+- [Beyond Power Calculations: Assessing 
+Type S (Sign) and Type M (Magnitude) 
+Errors](http://www.stat.columbia.edu/~gelman/research/published/retropower_final.pdf)
+
+
+
+
+
+
+
+
+
+

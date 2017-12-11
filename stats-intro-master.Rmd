@@ -1,0 +1,124 @@
+---
+title: "An introduction to statistical inference"
+author: "Francisco Rodríguez-Sánchez"
+date: "http://bit.ly/frod_san"
+output:
+  beamer_presentation:
+    incremental: yes
+header-includes:
+  - \def\begincols{\begin{columns}[c]}
+  - \def\endcols{\end{columns}}
+  - \def\begincol{\begin{column}{0.48\textwidth}}
+  - \def\endcol{\end{column}} 
+  - \setlength{\emergencystretch}{0em}
+  - \setlength{\parskip}{0pt}
+fontsize: 10pt
+---
+
+
+```{r knitr_setup, include=FALSE, cache=FALSE}
+
+library(rmarkdown)
+library(knitr)
+
+### Chunk options ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+## Code decoration
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+
+# ## Cache
+opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+
+# ## Plots
+opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+
+
+```
+
+
+
+# Why statistics?
+
+```{r intro, child = 'intro.Rmd'}
+```
+
+
+# Descriptive statistics
+
+```{r descriptive, child = 'descriptive.Rmd'}
+```
+
+
+# Sampling, confidence intervals, and Bayesian inference
+
+```{r sampling, child = 'sampling.Rmd'}
+```
+
+
+# Experimental Design
+
+```{r expdesign, child = 'expdesign.Rmd'}
+```
+
+
+# Hypothesis testing
+
+## Does height differ between local and foreign students?
+
+- Local people heigths:
+```{r echo=FALSE}
+h.sevi <- round(rnorm(5, 170, 10))
+cat(h.sevi)
+summary(h.sevi)
+```
+
+
+- Other heights:
+```{r echo=FALSE}
+h.out <- round(rnorm(10, 178, 10))
+cat(h.out)
+summary(h.out)
+```
+
+
+- We know what happens in **our samples**, but want to extrapolate to the whole **population**.
+
+
+## If we sample students' heights in this class...
+
+- Can we extrapolate results to
+
+    - this class?
+
+    - this university?
+
+    - this city?
+
+    - the world?
+
+- What's the **suitable population** to make inferences given this sample?
+
+
+
+
+```{r descriptive, child = 'hyptesting.Rmd'}
+```
+
+
+
+
+## END
+
+![](images/CClogo.png)
+     
+Source code and materials: https://github.com/Pakillo/stats-intro    
+    
+  
+    
+
+
+
+

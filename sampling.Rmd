@@ -1,0 +1,153 @@
+---
+title: "Sampling, confidence intervals, and Bayesian inference"
+output:
+  beamer_presentation:
+    incremental: yes
+header-includes:
+  - \def\begincols{\begin{columns}[c]}
+  - \def\endcols{\end{columns}}
+  - \def\begincol{\begin{column}{0.48\textwidth}}
+  - \def\endcol{\end{column}} 
+  - \setlength{\emergencystretch}{0em}
+  - \setlength{\parskip}{0pt}
+fontsize: 10pt
+---
+
+
+```{r include=FALSE, cache=FALSE}
+
+library(rmarkdown)
+library(knitr)
+
+### Chunk options ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+## Code decoration
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+
+# ## Cache
+opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+
+# ## Plots
+opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+
+
+```
+
+
+
+## Inference: from samples to population
+
+We rarely measure the whole **population**, but take **samples** instead.
+
+![](images/olivar.png)
+
+
+
+
+## What's the average height in this class?
+
+1. Write down your height and place of origin (Sevilla or other) in a piece of paper and put it in the bag.
+
+2. Now everyone **sample** 5 individuals from the whole **population** of heights.
+
+3. Calculate the mean and 95% CI for your sample (http://graphpad.com/quickcalcs/CImean1/).
+
+4. Draw on blackboard.
+
+5. Do all CIs contain true mean height?
+
+
+## If the 95% CI of X is (120, 150)...
+
+
+- There is a 95% probability that X lies between 120 and 150
+
+- We can be 95% confident that X lies between 120 and 150
+
+- If we repeated the experiment, 95% of the time X would fall between 120 and 150
+
+- If we repeated the experiment, 95% of the CIs would contain the true value of X
+
+- The probability that X is greater than 0 is at least 95%
+
+- The probability that X equals 0 is smaller than 5%
+
+
+https://pollev.com/franciscorod726
+
+
+
+
+
+## Understanding confidence intervals
+
+- Summarise *uncertainty* in parameter estimates.
+
+- http://rpsychologist.com/d3/CI/ (or [here](http://students.brown.edu/seeing-theory/statistical-inference/index.html))
+
+- A 95% CI is **NOT** 95% likely to contain the true parameter value!
+
+- Instead, 95% of the CIs obtained with this sampling will contain the true value. 
+
+- Like person who tells truth 95% of the time, but we can't tell if a particular statement is true.
+
+- It's a frequentist, long-run property.
+
+- To read more: [Morey et al (2015)](https://learnbayes.org/papers/confidenceIntervalsFallacy/)
+
+
+
+## What happens if we increase sample size?
+
+- CI width *decreases*...
+
+- but still 5% of CIs will NOT contain true mean!
+
+
+
+
+## Bayesian credible intervals
+
+- Bayesian **credible** intervals do give the probability that true parameter value is contained within them.
+
+- Frequentist CIs and Bayesian credible intervals can be similar, but not always.
+
+
+
+## Bayesian inference: prior, posterior, and likelihood
+
+
+$P(H|D) \propto P(D|H) x P(H)$
+
+$Posterior \propto Likelihood x Prior$
+
+```{r echo = FALSE}
+
+height <- runif(10, 160, 180)
+
+prior.height <- 180
+prior.height.var <- 20
+
+library(blmeco)
+blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(height), 
+                                     variance.known = 100, 
+                                     prior.theta = prior.height, 
+                                     prior.variance = prior.height.var)
+```
+
+
+
+## More apps to introduce Bayesian inference
+
+- [Normal](https://r.amherst.edu/apps/nhorton/Shiny-Bayes3/)
+
+- [Binomial](https://r.amherst.edu/apps/nhorton/Shiny-Bayes2/)
+
+- [Own data](https://utrecht-university.shinyapps.io/bayesian_estimation/)
+
+- [Bayesian t-test](http://rpsychologist.com/d3/bayes/)
+
+

@@ -1,0 +1,120 @@
+---
+title: "Descriptive statistics"
+output:
+  beamer_presentation:
+    incremental: yes
+header-includes:
+  - \def\begincols{\begin{columns}[c]}
+  - \def\endcols{\end{columns}}
+  - \def\begincol{\begin{column}{0.48\textwidth}}
+  - \def\endcol{\end{column}} 
+  - \setlength{\emergencystretch}{0em}
+  - \setlength{\parskip}{0pt}
+fontsize: 10pt
+---
+
+
+```{r include=FALSE, cache=FALSE}
+
+library(rmarkdown)
+library(knitr)
+
+### Chunk options ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+## Code decoration
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+
+# ## Cache
+opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+
+# ## Plots
+opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+
+
+```
+
+
+# Guess my age
+
+```{r echo = FALSE}
+age <- rnorm(25, 35, 2)
+```
+
+
+
+## Graph your estimates
+
+```{r}
+hist(age)
+```
+
+
+## Summarise that distribution
+
+\begincols
+
+\begincol
+
+- **Central tendency / location**
+
+    - mean
+
+    - median 
+
+    - mode
+
+
+- **Variation / Spread**
+
+    - min, max, range
+
+    - quantiles
+
+    - standard deviation
+
+    - standard error
+
+    - coefficient of variation
+
+    - confidence intervals
+
+\endcol
+
+\begincol
+
+```{r echo = FALSE}
+hist(age)
+```
+
+\endcol
+
+\endcols
+
+
+
+## In a Normal distribution
+
+![](images/gaussian.png)
+
+
+
+
+## What statistical descriptors are best? (and why)
+
+https://pollev.com/franciscorod726
+
+```{r echo = FALSE}
+par(mfrow = c(1,2))
+data <- c(rnorm(100, 165, 5), 200, 210, 220, 220, 250)
+hist(data, col = "grey")
+
+data <- c(rep(0, 22), rep(1, 16))
+hist(data, col = "grey")
+par(mfrow = c(1,1))
+```
+
+
+
