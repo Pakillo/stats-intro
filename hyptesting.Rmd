@@ -267,14 +267,6 @@ include_graphics("images/xkcd_correlation.png")
 
 
 
-
-## P-value depends on sample size
-
-- Same real difference is detected as significant or not depending on sample size:
-
-![](images/smallSS.png)
-
-
 ## P-value depends on sample size
 
 ```{r}
@@ -282,6 +274,15 @@ include_graphics("images/pvalue_SS_Motulski.jpg")
 ```
 
 http://dx.doi.org/10.1002/prp2.93
+
+
+
+
+## P-value depends on sample size
+
+- Same real difference is detected as significant or not depending on sample size:
+
+![](images/smallSS.png)
 
 
 ## Statistically significant != biologically important
@@ -294,8 +295,6 @@ http://dx.doi.org/10.1002/prp2.93
 ## Statistically significant != biologically important
 
 - Statistically significant = unlikely to be zero
-
-- Suggestion: Try to avoid 'significant' all together
 
 - Suggested reading: [*significantly misleading*](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
 

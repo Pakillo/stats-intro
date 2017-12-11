@@ -41,6 +41,7 @@ opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
 
 ```{r echo = FALSE}
 age <- rnorm(25, 35, 2)
+age <- c(27, 32, 29, 34, 32, 31, 33, 36, 35, 30, 33, 33, 34, 32, 34, 34, 34, 35, 35)
 ```
 
 
