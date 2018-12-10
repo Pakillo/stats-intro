@@ -58,10 +58,12 @@ opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
 include_graphics("images/Abrain_nonsense.png")
 ```
 
+## What is the p-value?
+
+https://pollev.com/franciscorod726
+
 
 ## **P value**
-
-- Tell me...
 
 - Very complicated concept: even statisticians fail to describe it well.
 
@@ -295,7 +297,7 @@ include_graphics("images/Abrain_nonsense.png")
 
 ## Instead of falsifying a null model, estimate effects and compare meaningful models
 
-```{r echo=FALSE}
+```{r echo=FALSE, out.height='4in', out.width='3in'}
 include_graphics("images/science_process.jpg")
 ```
 
