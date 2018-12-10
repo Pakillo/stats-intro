@@ -95,6 +95,31 @@ hist(age)
 \endcols
 
 
+## Relationship between SD and SEM
+
+\begincols
+\begincol
+```{r echo=FALSE}
+include_graphics("images/SD-SEM.PNG")
+```
+
+\endcol
+
+\begincol
+
+- SD quantifies scatter in population
+
+- SEM quantifies uncertainty in parameter estimate (population mean)
+
+- SEM = SD/sqrt(n)
+
+- SEM decreases with sample size (mean better known), SD does not.
+
+- https://gallery.shinyapps.io/sampling_and_stderr/
+
+\endcol
+\endcols
+
 
 ## In a Normal distribution
 
