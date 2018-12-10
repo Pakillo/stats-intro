@@ -84,9 +84,9 @@ https://pollev.com/franciscorod726
 
 ## Understanding confidence intervals
 
-- Summarise *uncertainty* in parameter estimates.
+- Summarise **uncertainty** in parameter estimates.
 
-- http://rpsychologist.com/d3/CI/ (or [here](http://students.brown.edu/seeing-theory/statistical-inference/index.html))
+- https://rpsychologist.com/d3/CI/ (or [here](https://seeing-theory.brown.edu/frequentist-inference/index.html#section2))
 
 - A 95% CI is **NOT** 95% likely to contain the true parameter value!
 
@@ -101,6 +101,8 @@ https://pollev.com/franciscorod726
 
 
 ## What happens if we increase sample size?
+
+https://rpsychologist.com/d3/CI/
 
 - CI width *decreases*...
 
@@ -119,16 +121,15 @@ https://pollev.com/franciscorod726
 
 ## Bayesian inference: prior, posterior, and likelihood
 
-
 $P(H|D) \propto P(D|H) x P(H)$
 
-$Posterior \propto Likelihood x Prior$
+$Posterior \propto Likelihood \cdot Prior$
 
 ```{r echo = FALSE}
 
-height <- runif(10, 160, 180)
+height <- runif(10, 170, 190)
 
-prior.height <- 180
+prior.height <- 160
 prior.height.var <- 20
 
 library(blmeco)
@@ -138,6 +139,52 @@ blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(heigh
                                      prior.variance = prior.height.var)
 ```
 
+
+## What is the likelihood?
+
+$L(\theta|x) = P(x|\theta)$
+
+```{r echo=FALSE, out.height='3in', out.width='4in'}
+include_graphics("images/likelihood.PNG")
+```
+
+https://seeing-theory.brown.edu/bayesian-inference/index.html
+
+
+## Bayesian inference: prior and likelihood produce posterior
+
+```{r echo = FALSE}
+
+height <- runif(10, 170, 190)
+
+prior.height <- 160
+prior.height.var <- 20
+
+library(blmeco)
+blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(height), 
+                                     variance.known = 100, 
+                                     prior.theta = prior.height, 
+                                     prior.variance = prior.height.var)
+```
+
+
+## With increasing sample size, likelihood dominates prior
+
+```{r echo = FALSE}
+
+height <- runif(50, 170, 190)
+
+prior.height <- 160
+prior.height.var <- 20
+
+library(blmeco)
+blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(height), 
+                                     variance.known = 100, 
+                                     prior.theta = prior.height, 
+                                     prior.variance = prior.height.var)
+```
+
+https://r.amherst.edu/apps/nhorton/Shiny-Bayes3/
 
 
 ## More apps to introduce Bayesian inference
