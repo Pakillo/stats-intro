@@ -52,6 +52,12 @@ opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
 - **Alternative hypothesis**: groups are different.
 
 
+## In ecology, everything is somewhat different
+
+```{r echo=FALSE, out.height='3in', out.width='4in'}
+include_graphics("images/Abrain_nonsense.png")
+```
+
 
 ## **P value**
 
@@ -163,16 +169,26 @@ https://doi.org/10.1007/s10654-016-0149-3
 
 
 
-## Good reading
+## Good read
 
 ![](images/steel_paper.png)
 
-http://dx.doi.org/10.1890/ES13-00160.1
+https://doi.org/10.1890/ES13-00160.1
 
 Also http://www.statisticsdonewrong.com/
 
 
+## Good read
 
+```{r out.height='3in', out.width='2in'}
+include_graphics("images/Sutherland_tips.png")
+```
+
+https://doi.org/10.1038/503335a
+
+
+
+# Visualisation of data and models is key 
 
 ## First things first
 
@@ -229,7 +245,7 @@ https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
 
 
 
-
+# Inference from observational studies
 
 
 ## News: Hamburgers increase risk of heart attack
@@ -267,13 +283,32 @@ include_graphics("images/xkcd_correlation.png")
 
 
 
+
+# NHST and p-values
+
+## In ecology, everything is somewhat different
+
+```{r echo=FALSE, out.height='3in', out.width='4in'}
+include_graphics("images/Abrain_nonsense.png")
+```
+
+
+## Instead of falsifying a null model, estimate effects and compare meaningful models
+
+```{r echo=FALSE}
+include_graphics("images/science_process.jpg")
+```
+
+https://doi.org/10.1242/jeb.104976
+
+
 ## P-value depends on sample size
 
 ```{r}
 include_graphics("images/pvalue_SS_Motulski.jpg")
 ```
 
-http://dx.doi.org/10.1002/prp2.93
+https://doi.org/10.1002/prp2.93
 
 
 
@@ -296,7 +331,9 @@ http://dx.doi.org/10.1002/prp2.93
 
 - Statistically significant = unlikely to be zero
 
-- Suggested reading: [*significantly misleading*](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
+- Good read: [*significantly misleading*](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
+
+- My suggestion: avoid significant/not significant (and maybe p-values too)
 
 - Beyond significance, look at *effect sizes*.
 
@@ -316,6 +353,24 @@ http://dx.doi.org/10.1002/prp2.93
 ## Failure to reject H0 != H0 is true
 
 ![](images/CIoverlap.png)
+
+
+## p-value > 0.05?
+
+"We were unable to find evidence against the hypothesis that A = B with the current sample size"
+
+
+## Is it safe to allow right turn with red lights?
+
+- Right turn not allowed: 308 accidents
+
+- Right turn allowed: 337 accidents
+
+- No *significant* difference, hence safe
+
+- Misinterpretation of underpowered study cost lives
+
+https://www.statisticsdonewrong.com/power.html#the-wrong-turn-on-red
 
 
 
@@ -381,7 +436,7 @@ https://doi.org/10.1080/00031305.2016.1154108
 
 ## The New Statistics
 
-Aim for estimation of effects and their uncertainty.
+Aim for estimation of effects and their uncertainty (SE, CI...)
 
 ![](images/cumming.png)
 
