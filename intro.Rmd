@@ -42,7 +42,9 @@ opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
 
 - what's the probability that something occurs?
 
-- does X influence Y? How much?
+- does X influence Y? How much? 
+
+- can we predict Y knowing X, Z... How well?
 
 
 
