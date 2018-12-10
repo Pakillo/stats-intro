@@ -77,7 +77,9 @@ See [*The evolution of correlations*](http://vimeo.com/57127001)
 
 Stopping rules:
 
-![](images/ssize-pvalue.png)
+```{r echo=FALSE, out.height='3in', out.width='3in'}
+include_graphics("images/ssize-pvalue.png")
+```
 
 
 ## Sample size estimation
