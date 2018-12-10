@@ -41,8 +41,12 @@ opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
 
 Discuss with partner (5')
 
-![](images/olivar-half.png)
+![](images/olivar.png)
 
+
+# Experimental design principles
+
+# Replication
 
 ## Replication!
 
@@ -57,13 +61,17 @@ Discuss with partner (5')
 
 - Traditionally, ecology studies have had too low sample sizes. 
 
-- Hence missing many subtle effects, and [prone to bias](http://science.sciencemag.org/content/355/6325/584.summary).
+- Low sample sizes miss subtle effects, but also [prone to bias](http://science.sciencemag.org/content/355/6325/584.summary).
 
-- Complex models (w/ many predictors, interactions etc) require **high** sample sizes.
+
+## Low sample sizes very sensitive to random noise
+
+[![](images/lowSS_noise.PNG)](https://video.twimg.com/tweet_video/DifncYiX0AEnn19.mp4)
+
+https://twitter.com/ajstewart_lang/status/1020038488278945797
 
 
 ## Sample size is very important
-
 
 See [*The evolution of correlations*](http://vimeo.com/57127001)
 
@@ -72,6 +80,18 @@ Stopping rules:
 ![](images/ssize-pvalue.png)
 
 
+## Sample size estimation
+
+- Plan model **before** data collection.
+
+- Do simulations. Power/Sample size analyses ([e.g.](https://doi.org/10.1111/2041-210X.12504)).
+
+- Plan to have at least **10-30 observations per predictor**.
+
+- Complex models (w/ many predictors, interactions etc) require **high** sample sizes.
+
+
+# Randomization
 
 ## Randomization
 
@@ -85,6 +105,7 @@ Stopping rules:
 - Stratify: randomize within groups (e.g. species, soil types)
 
 
+# Controls
 
 ## Have controls
 
@@ -95,6 +116,15 @@ Stopping rules:
 - Measure before & after treatment.
 
 - Consider blind designs to avoid observer bias.
+
+
+## Experimental design principles
+
+1. Replication
+
+2. Randomization
+
+3. Controls
 
 
 ## To read more
