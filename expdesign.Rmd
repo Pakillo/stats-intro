@@ -3,6 +3,7 @@ title: "Experimental design"
 output:
   beamer_presentation:
     incremental: yes
+    fig_caption: no
 header-includes:
   - \def\begincols{\begin{columns}[c]}
   - \def\endcols{\end{columns}}
@@ -59,9 +60,9 @@ Discuss with partner (5')
 
 - How many? As much as you can! See [Gelman & Carlin 2014](https://doi.org/10.1177/1745691614551642).
 
-- Traditionally, ecology studies have had too low sample sizes. 
+- Traditionally, ecology studies have had **too low sample sizes**. 
 
-- Low sample sizes miss subtle effects, but also [prone to bias](http://science.sciencemag.org/content/355/6325/584.summary).
+- Low sample sizes miss subtle effects, but also [**prone to bias**](http://science.sciencemag.org/content/355/6325/584.summary).
 
 
 ## Low sample sizes very sensitive to random noise
@@ -71,11 +72,18 @@ Discuss with partner (5')
 https://twitter.com/ajstewart_lang/status/1020038488278945797
 
 
-## Sample size is very important
+## Low sample sizes may bias inferences about population
+
+![](images/regression_pop_vs_sample.PNG)
+
+http://statisticalgate.com/regression-simulation/
+
+
+## Low sample sizes may bias inferences
 
 See [*The evolution of correlations*](http://vimeo.com/57127001)
 
-Stopping rules:
+**Stopping rules**
 
 ```{r echo=FALSE, out.height='3in', out.width='3in'}
 include_graphics("images/ssize-pvalue.png")
@@ -84,9 +92,9 @@ include_graphics("images/ssize-pvalue.png")
 
 ## Sample size estimation
 
-- Plan model **before** data collection.
+- Plan model/statistical analysis **before** data collection.
 
-- Do simulations. Power/Sample size analyses ([e.g.](https://doi.org/10.1111/2041-210X.12504)).
+- **Do simulations**. Power/Sample size/Precision analyses (e.g. [this](https://doi.org/10.1111/2041-210X.12504) or [this](https://precisely.malco.io/)).
 
 - Plan to have at least **10-30 observations per predictor**.
 
@@ -113,11 +121,11 @@ include_graphics("images/ssize-pvalue.png")
 
 - Untreated individuals, plots... (assigned randomly, of course).
 
-- Must differ only in treatment (i.e. homogeneous environment).
+- **Must differ only in treatment** (i.e. homogeneous environment).
 
-- Measure before & after treatment.
+- Measure **before & after** treatment.
 
-- Consider blind designs to avoid observer bias.
+- Consider **blind designs** to avoid observer bias.
 
 
 ## Experimental design principles
