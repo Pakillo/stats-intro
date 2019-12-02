@@ -2,9 +2,8 @@
 title: "Hypothesis testing"
 output:
   beamer_presentation:
-    fig_height: 4
-    fig_width: 5
     incremental: yes
+    fig_caption: no
 header-includes:
   - \def\begincols{\begin{columns}[c]}
   - \def\endcols{\end{columns}}
@@ -209,7 +208,7 @@ https://doi.org/10.1038/503335a
 
 ## Don't use statistics blindly: *Visualise*
 
-```{r}
+```{r out.height='3in', out.width='4in'}
 include_graphics("images/correlations.png")
 ```
 
@@ -219,7 +218,7 @@ https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
 
 ## Don't use statistics blindly: *Visualise*
 
-```{r}
+```{r out.height='3in', out.width='4in'}
 include_graphics("images/correlations2.png")
 ```
 
@@ -229,7 +228,7 @@ https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
 
 ## Don't use statistics blindly: *Visualise*
 
-```{r}
+```{r out.height='3in', out.width='4in'}
 include_graphics("images/correlations3.png")
 ```
 
@@ -297,7 +296,7 @@ include_graphics("images/Abrain_nonsense.png")
 
 ## Instead of falsifying a null model, estimate effects and compare meaningful models
 
-```{r echo=FALSE, out.height='4in', out.width='3in'}
+```{r echo=FALSE, out.height='3in', out.width='3in'}
 include_graphics("images/science_process.jpg")
 ```
 
@@ -306,7 +305,7 @@ https://doi.org/10.1242/jeb.104976
 
 ## P-value depends on sample size
 
-```{r}
+```{r out.height='3in', out.width='4in'}
 include_graphics("images/pvalue_SS_Motulski.jpg")
 ```
 
@@ -326,7 +325,10 @@ https://doi.org/10.1002/prp2.93
 
 - With big sample size, we can find **highly significant but biologically unimportant** differences.
 
-![](images/bigSS.png)
+```{r out.height='3in', out.width='4in'}
+include_graphics("images/bigSS.png")
+```
+
 
 
 ## Statistically significant != biologically important
@@ -359,7 +361,9 @@ https://doi.org/10.1002/prp2.93
 
 ## p-value > 0.05?
 
-"We were unable to find evidence against the hypothesis that A = B with the current sample size"
+- "We were unable to find evidence against the hypothesis that A = B with the current sample size" ([Harrell](https://discourse.datamethods.org/t/language-for-communicating-frequentist-results-about-treatment-effects/934))
+
+- "Differences between groups were not statistically clear" ([Dushoff et al](https://doi.org/10.1111/2041-210X.13159))
 
 
 ## Is it safe to allow right turn with red lights?
