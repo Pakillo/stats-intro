@@ -3,6 +3,7 @@ title: "Sampling, confidence intervals, and Bayesian inference"
 output:
   beamer_presentation:
     incremental: yes
+    fig_caption: no
 header-includes:
   - \def\begincols{\begin{columns}[c]}
   - \def\endcols{\end{columns}}
@@ -47,7 +48,7 @@ We rarely measure the whole **population**, but take **samples** instead.
 
 
 
-## What's the average height in this class?
+## What's the average height in this group?
 
 1. Write down your height and place of origin (Sevilla or other) in a piece of paper and put it in the bag.
 
@@ -188,6 +189,10 @@ https://r.amherst.edu/apps/nhorton/Shiny-Bayes3/
 
 
 ## More apps to introduce Bayesian inference
+
+- [Bayesian Demo](https://micl.shinyapps.io/prior2post/)
+
+- [Bayesian inference for a population mean](https://patrickbarks.shinyapps.io/bayes/)
 
 - [Normal](https://r.amherst.edu/apps/nhorton/Shiny-Bayes3/)
 
