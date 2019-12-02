@@ -54,6 +54,28 @@ hist(age)
 ```
 
 
+## Do you think these data are good estimates of my age?
+
+https://pollev.com/franciscorod726
+
+```{r out.height='2in', out.width='2in', echo=FALSE}
+hist(age)
+```
+
+Why / Why not?
+
+
+---
+
+Data are hardly ever objective. 
+
+We decide **what to measure, when, where, and how**.
+
+Always consider: 
+
+How well do these numbers reflect what we are trying to measure?
+
+
 ## Summarise that distribution
 
 ```{r echo = FALSE, out.height='0.7in', out.width='0.7in', fig.align='right', eval=TRUE}
