@@ -3,6 +3,7 @@ title: "Descriptive statistics"
 output:
   beamer_presentation:
     incremental: yes
+    fig_caption: no
 header-includes:
   - \def\begincols{\begin{columns}[c]}
   - \def\endcols{\end{columns}}
@@ -55,51 +56,46 @@ hist(age)
 
 ## Summarise that distribution
 
-\begincols
+```{r echo = FALSE, out.height='0.7in', out.width='0.7in', fig.align='right', eval=TRUE}
+hist(age)
+```
 
-\begincol
 
 - **Central tendency / location**
 
-    - mean
+    - mean: 
+  $\dfrac {a_{1} + a_{2} + a_{3}} {n}$
 
-    - median 
+    - median (50% percentile)
 
-    - mode
+    - mode (most frequent value)
 
 
 - **Variation / Spread**
 
     - min, max, range
 
-    - quantiles
+    - quantiles 
+      (quartiles, percentiles...)
 
-    - standard deviation
+    - standard deviation: 
+  $SD = \sqrt {\dfrac {\sum \left( x-\mu\right) ^{2}}{n-1}}$
 
-    - standard error
+    - standard error:
+  $SEM = \dfrac{SD} {\sqrt{n}}$
 
-    - coefficient of variation
+    - coefficient of variation (CV = SD / mean)
 
     - confidence intervals
 
-\endcol
 
-\begincol
-
-```{r echo = FALSE}
-hist(age)
-```
-
-\endcol
-
-\endcols
 
 
 ## Relationship between SD and SEM
 
 \begincols
 \begincol
-```{r echo=FALSE}
+```{r echo=FALSE, out.height='3in', out.width='2.3in'}
 include_graphics("images/SD-SEM.PNG")
 ```
 
