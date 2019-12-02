@@ -5,6 +5,7 @@ date: "http://bit.ly/frod_san"
 output:
   beamer_presentation:
     incremental: yes
+    fig_caption: no
 header-includes:
   - \def\begincols{\begin{columns}[c]}
   - \def\endcols{\end{columns}}
