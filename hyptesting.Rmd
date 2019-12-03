@@ -361,9 +361,9 @@ include_graphics("images/bigSS.png")
 
 ## p-value > 0.05?
 
-- "We were unable to find evidence against the hypothesis that A = B with the current sample size" ([Harrell](https://discourse.datamethods.org/t/language-for-communicating-frequentist-results-about-treatment-effects/934))
+- "We were **unable to find evidence** against the hypothesis that A = B **with the current sample size**" ([Harrell](https://discourse.datamethods.org/t/language-for-communicating-frequentist-results-about-treatment-effects/934))
 
-- "Differences between groups were not statistically clear" ([Dushoff et al](https://doi.org/10.1111/2041-210X.13159))
+- "Differences between groups were **not statistically clear**" ([Dushoff et al](https://doi.org/10.1111/2041-210X.13159))
 
 
 ## Is it safe to allow right turn with red lights?
