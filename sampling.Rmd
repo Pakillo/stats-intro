@@ -122,22 +122,32 @@ https://rpsychologist.com/d3/CI/
 
 ## Bayesian inference: prior, posterior, and likelihood
 
-$P(H|D) \propto P(D|H) x P(H)$
+$P(H|D) \propto P(D|H) \cdot P(H)$
 
 $Posterior \propto Likelihood \cdot Prior$
 
-```{r echo = FALSE}
+```{r echo = FALSE, results='hide'}
 
-height <- runif(10, 170, 190)
+# height <- runif(10, 170, 190)
+# 
+# prior.height <- 160
+# prior.height.var <- 20
 
-prior.height <- 160
-prior.height.var <- 20
+set.seed(123)
+# example with students' hours of sleep
+sleephours.sd <- 2
+sleephours <- rnorm(8, 9, sleephours.sd)
+
+prior.sleep <- 7
+prior.sleep.var <- 1
 
 library(blmeco)
-blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(height), 
-                                     variance.known = 100, 
-                                     prior.theta = prior.height, 
-                                     prior.variance = prior.height.var)
+blmeco::triplot.normal.knownvariance(theta.data = mean(sleephours), 
+                                     n = length(sleephours), 
+                                     variance.known = sleephours.sd*sleephours.sd, 
+                                     prior.theta = prior.sleep, 
+                                     prior.variance = prior.sleep.var)
+title("How many hours of daily sleep?")
 ```
 
 
@@ -154,38 +164,49 @@ https://seeing-theory.brown.edu/bayesian-inference/index.html
 
 ## Bayesian inference: prior and likelihood produce posterior
 
-```{r echo = FALSE}
+```{r echo = FALSE, results='hide'}
 
-height <- runif(10, 170, 190)
+set.seed(123)
 
-prior.height <- 160
-prior.height.var <- 20
+# example with students' hours of sleep
+sleephours.sd <- 2
+sleephours <- rnorm(8, 9, sleephours.sd)
+
+prior.sleep <- 7
+prior.sleep.var <- 1
 
 library(blmeco)
-blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(height), 
-                                     variance.known = 100, 
-                                     prior.theta = prior.height, 
-                                     prior.variance = prior.height.var)
+blmeco::triplot.normal.knownvariance(theta.data = mean(sleephours), 
+                                     n = length(sleephours), 
+                                     variance.known = sleephours.sd*sleephours.sd, 
+                                     prior.theta = prior.sleep, 
+                                     prior.variance = prior.sleep.var)
+title("How many hours of daily sleep?")
 ```
 
 
 ## With increasing sample size, likelihood dominates prior
 
-```{r echo = FALSE}
+```{r echo = FALSE, results='hide'}
 
-height <- runif(50, 170, 190)
+set.seed(123)
 
-prior.height <- 160
-prior.height.var <- 20
+# example with students' hours of sleep
+sleephours.sd <- 2
+sleephours <- rnorm(30, 9, sleephours.sd)
+
+prior.sleep <- 7
+prior.sleep.var <- 1
 
 library(blmeco)
-blmeco::triplot.normal.knownvariance(theta.data = mean(height), n = length(height), 
-                                     variance.known = 100, 
-                                     prior.theta = prior.height, 
-                                     prior.variance = prior.height.var)
+blmeco::triplot.normal.knownvariance(theta.data = mean(sleephours), 
+                                     n = length(sleephours), 
+                                     variance.known = sleephours.sd*sleephours.sd, 
+                                     prior.theta = prior.sleep, 
+                                     prior.variance = prior.sleep.var)
+title("How many hours of daily sleep?")
 ```
 
-https://r.amherst.edu/apps/nhorton/Shiny-Bayes3/
 
 
 ## More apps to introduce Bayesian inference
@@ -202,4 +223,14 @@ https://r.amherst.edu/apps/nhorton/Shiny-Bayes3/
 
 - [Bayesian t-test](http://rpsychologist.com/d3/bayes/)
 
+
+## Bayesian statistics in practice
+
+- Integrate information (prior)
+
+- Prior regularises unlikely estimates from data
+
+- Large dataset -> prior effect diminishes
+
+- Uncertainty / Propagate errors
 
