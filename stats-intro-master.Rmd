@@ -1,7 +1,7 @@
 ---
 title: "An introduction to statistical inference"
 author: "Francisco Rodríguez-Sánchez"
-date: "http://bit.ly/frod_san"
+date: "https://frodriguezsanchez.net"
 output:
   beamer_presentation:
     incremental: yes
