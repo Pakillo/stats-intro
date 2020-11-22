@@ -1,39 +1,47 @@
 ---
 title: "Descriptive statistics"
 output:
-  beamer_presentation:
+  binb::metropolis:
     incremental: yes
     fig_caption: no
-header-includes:
-  - \def\begincols{\begin{columns}[c]}
-  - \def\endcols{\end{columns}}
-  - \def\begincol{\begin{column}{0.48\textwidth}}
-  - \def\endcol{\end{column}} 
-  - \setlength{\emergencystretch}{0em}
-  - \setlength{\parskip}{0pt}
 fontsize: 10pt
+urlcolor: blue
+linkcolor: blue
+header-includes:
+  - \definecolor{shadecolor}{RGB}{230,230,230}
 ---
 
 
 ```{r include=FALSE, cache=FALSE}
 
-library(rmarkdown)
-library(knitr)
+library("knitr")
 
 ### Chunk options ###
 
 ## Text results
-opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, size = 'tiny')
 
 ## Code decoration
-opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, crop = TRUE)
 
 # ## Cache
-opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+# opts_chunk$set(cache = TRUE, cache.path = "knitr_output/cache/")
 
 # ## Plots
-opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+# opts_chunk$set(fig.path = "knitr_output/figures/")
+opts_chunk$set(fig.align = 'center', out.width = '4in', out.height = '3in')
 
+### Hooks ###
+## Crop plot margins
+knit_hooks$set(crop = hook_pdfcrop)
+
+## Reduce font size
+## use tinycode = TRUE as chunk option to reduce code font size
+# see http://stackoverflow.com/a/39961605
+knit_hooks$set(tinycode = function(before, options, envir) {
+  if (before) return(paste0("\n \\", options$size, "\n\n"))
+  else return("\n\n \\normalsize \n")
+  })
 
 ```
 
@@ -78,52 +86,59 @@ How well do these numbers reflect what we are trying to measure?
 
 ## Summarise that distribution
 
-```{r echo = FALSE, out.height='0.7in', out.width='0.7in', fig.align='right', eval=TRUE}
-hist(age)
-```
+:::::::::::::: {.columns align=center .onlytextwidth}
 
+::: {.column width="60%"}
+### Central tendency / location
 
-- **Central tendency / location**
-
-    - mean: 
+  - mean: 
   $\dfrac {a_{1} + a_{2} + a_{3}} {n}$
 
-    - median (50% percentile)
+  - median (50% percentile)
 
-    - mode (most frequent value)
+  - mode (most frequent value)
 
 
-- **Variation / Spread**
+### Variation / Spread
 
-    - min, max, range
+  - min, max, range
 
-    - quantiles 
+  - quantiles 
       (quartiles, percentiles...)
 
-    - standard deviation: 
+  - standard deviation: 
   $SD = \sqrt {\dfrac {\sum \left( x-\mu\right) ^{2}}{n-1}}$
 
-    - standard error:
+  - standard error:
   $SEM = \dfrac{SD} {\sqrt{n}}$
 
-    - coefficient of variation (CV = SD / mean)
+  - coefficient of variation (CV = SD / mean)
 
-    - confidence intervals
+  - confidence intervals
+
+:::
+
+::: {.column width="40%" align=center}
+```{r out.width='1in', out.height='1in'}
+hist(age)
+```
+:::
+::::::::::::::
 
 
 
 
 ## Relationship between SD and SEM
 
-\begincols
-\begincol
-```{r echo=FALSE, out.height='3in', out.width='2.3in'}
+:::::::::::::: {.columns align=center .onlytextwidth}
+
+::: {.column width="50%"}
+```{r echo=FALSE, out.height='3.5in', out.width='2.3in'}
 include_graphics("images/SD-SEM.PNG")
 ```
+:::
 
-\endcol
-
-\begincol
+::: {.column width="50%"}
 
 - SD quantifies scatter in population
 
@@ -135,8 +150,10 @@ include_graphics("images/SD-SEM.PNG")
 
 - https://gallery.shinyapps.io/sampling_and_stderr/
 
-\endcol
-\endcols
+:::
+::::::::::::::
+
+
 
 
 ## In a Normal distribution

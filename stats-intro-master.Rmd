@@ -3,39 +3,47 @@ title: "An introduction to statistical inference"
 author: "Francisco Rodríguez-Sánchez"
 date: "https://frodriguezsanchez.net"
 output:
-  beamer_presentation:
+  binb::metropolis:
     incremental: yes
     fig_caption: no
-header-includes:
-  - \def\begincols{\begin{columns}[c]}
-  - \def\endcols{\end{columns}}
-  - \def\begincol{\begin{column}{0.48\textwidth}}
-  - \def\endcol{\end{column}} 
-  - \setlength{\emergencystretch}{0em}
-  - \setlength{\parskip}{0pt}
 fontsize: 10pt
+urlcolor: blue
+linkcolor: blue
+header-includes:
+  - \definecolor{shadecolor}{RGB}{230,230,230}
 ---
 
 
 ```{r knitr_setup, include=FALSE, cache=FALSE}
 
-library(rmarkdown)
-library(knitr)
+library("knitr")
 
 ### Chunk options ###
 
 ## Text results
-opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, size = 'tiny')
 
 ## Code decoration
-opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, crop = TRUE)
 
 # ## Cache
-opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+# opts_chunk$set(cache = TRUE, cache.path = "knitr_output/cache/")
 
 # ## Plots
-opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+# opts_chunk$set(fig.path = "knitr_output/figures/")
+opts_chunk$set(fig.align = 'center', out.width = '4in', out.height = '3in')
 
+### Hooks ###
+## Crop plot margins
+knit_hooks$set(crop = hook_pdfcrop)
+
+## Reduce font size
+## use tinycode = TRUE as chunk option to reduce code font size
+# see http://stackoverflow.com/a/39961605
+knit_hooks$set(tinycode = function(before, options, envir) {
+  if (before) return(paste0("\n \\", options$size, "\n\n"))
+  else return("\n\n \\normalsize \n")
+  })
 
 ```
 
@@ -67,19 +75,19 @@ opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
 
 # Hypothesis testing
 
-## Does height differ between local and foreign students?
+## Do sleep hours differ between local and foreign students?
 
-- Local people heigths:
+- Daily sleep hours by local students:
 ```{r echo=FALSE}
-h.sevi <- round(rnorm(5, 170, 10))
+h.sevi <- round(rnorm(5, 7, 1))
 cat(h.sevi)
 summary(h.sevi)
 ```
 
 
-- Other heights:
+- Daily sleep hours by non-local students:
 ```{r echo=FALSE}
-h.out <- round(rnorm(10, 178, 10))
+h.out <- round(rnorm(10, 8.5, 1))
 cat(h.out)
 summary(h.out)
 ```
@@ -88,7 +96,7 @@ summary(h.out)
 - We know what happens in **our samples**, but want to extrapolate to the whole **population**.
 
 
-## If we sample students' heights in this class...
+## If we sample students in this class...
 
 - Can we extrapolate results to
 
@@ -105,7 +113,7 @@ summary(h.out)
 
 
 
-```{r descriptive, child = 'hyptesting.Rmd'}
+```{r hyptesting, child = 'hyptesting.Rmd'}
 ```
 
 

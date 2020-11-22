@@ -1,39 +1,47 @@
 ---
 title: "Hypothesis testing"
 output:
-  beamer_presentation:
+  binb::metropolis:
     incremental: yes
     fig_caption: no
-header-includes:
-  - \def\begincols{\begin{columns}[c]}
-  - \def\endcols{\end{columns}}
-  - \def\begincol{\begin{column}{0.48\textwidth}}
-  - \def\endcol{\end{column}} 
-  - \setlength{\emergencystretch}{0em}
-  - \setlength{\parskip}{0pt}
 fontsize: 10pt
+urlcolor: blue
+linkcolor: blue
+header-includes:
+  - \definecolor{shadecolor}{RGB}{230,230,230}
 ---
 
 
 ```{r include=FALSE, cache=FALSE}
 
-library(rmarkdown)
-library(knitr)
+library("knitr")
 
 ### Chunk options ###
 
 ## Text results
-opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, size = 'tiny')
 
 ## Code decoration
-opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
+opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, crop = TRUE)
 
 # ## Cache
-opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
+# opts_chunk$set(cache = TRUE, cache.path = "knitr_output/cache/")
 
 # ## Plots
-opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
+# opts_chunk$set(fig.path = "knitr_output/figures/")
+opts_chunk$set(fig.align = 'center', out.width = '4in', out.height = '3in')
 
+### Hooks ###
+## Crop plot margins
+knit_hooks$set(crop = hook_pdfcrop)
+
+## Reduce font size
+## use tinycode = TRUE as chunk option to reduce code font size
+# see http://stackoverflow.com/a/39961605
+knit_hooks$set(tinycode = function(before, options, envir) {
+  if (before) return(paste0("\n \\", options$size, "\n\n"))
+  else return("\n\n \\normalsize \n")
+  })
 
 ```
 
@@ -59,10 +67,16 @@ include_graphics("images/Abrain_nonsense.png")
 
 ## What is the p-value?
 
+- The probability that the data were produced by random chance alone
+
+- The probability of getting results at least as extreme as the ones you observed if H0 was true
+
+- The probability of null hypothesis being true
+
 https://pollev.com/franciscorod726
 
 
-## **P value**
+## P-value
 
 - Very complicated concept: even statisticians fail to describe it well.
 
@@ -72,6 +86,19 @@ https://pollev.com/franciscorod726
 
 - Large P-value: data not unusual if H0 was true.
 
+
+
+## If p-value > 0.05
+
+- the null hypothesis is false, i.e. the alternative hypothesis must be true
+
+- the alternative hypothesis is false, i.e. the null hypothesis must be true
+
+- it's unclear if there are differences between groups
+
+- there is no difference between groups
+
+https://pollev.com/franciscorod726
 
 
 
@@ -85,15 +112,18 @@ https://pollev.com/franciscorod726
 
 - **CAUTION:**
 
-- This is **very widespread, but incorrect** practice.
-
 - P-value is continuous. We must **avoid binary decisions** based on **arbitrary thresholds**.
 
-- More on this later.
+. . . 
+
+```{r out.height='1in', out.width='3in'}
+knitr::include_graphics("images/nature_significance.PNG")
+```
+
+https://doi.org/10.1038/d41586-019-00857-9
 
 
-
-## Let's do the test
+## Are the heights of local and non-local students different?
 
 ```{r echo=FALSE}
 h.sevi <- round(rnorm(5, 170, 10))
@@ -104,7 +134,7 @@ h.out <- round(rnorm(10, 178, 10))
 t.test(h.sevi, h.out)
 ```
 
-**Are heights different then?**
+https://pollev.com/franciscorod726
 
 
 
@@ -147,8 +177,7 @@ test <- prop.test(sum(coin), ntrials)
 test
 ```
 
-
-
+https://pollev.com/franciscorod726
 
 
 ## Correlation between variables
@@ -240,8 +269,9 @@ https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
 
 > **Plot. Check models. Plot. Check assumptions. Plot.**
 
-[Lavine 2014 *Ecology*](http://dx.doi.org/10.1890/13-1112.1)
-
+\raggedright
+\scriptsize [Lavine 2014 *Ecology*](http://dx.doi.org/10.1890/13-1112.1)
+\raggedleft
 
 
 
@@ -294,9 +324,9 @@ include_graphics("images/Abrain_nonsense.png")
 ```
 
 
-## Instead of falsifying a null model, estimate effects and compare meaningful models
+## Instead of falsifying null model, compare meaningful models
 
-```{r echo=FALSE, out.height='3in', out.width='3in'}
+```{r echo=FALSE, out.height='2.5in', out.width='2.5in'}
 include_graphics("images/science_process.jpg")
 ```
 
@@ -316,16 +346,16 @@ https://doi.org/10.1002/prp2.93
 
 ## P-value depends on sample size
 
-- Same real difference is detected as significant or not depending on sample size:
+Same real difference is detected as significant or not depending on sample size:
 
 ![](images/smallSS.png)
 
 
 ## Statistically significant != biologically important
 
-- With big sample size, we can find **highly significant but biologically unimportant** differences.
+With big sample size, we can find **highly significant but biologically unimportant** differences.
 
-```{r out.height='3in', out.width='4in'}
+```{r out.height='2.5in', out.width='3.5in'}
 include_graphics("images/bigSS.png")
 ```
 
