@@ -29,7 +29,7 @@ opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, cro
 
 # ## Plots
 # opts_chunk$set(fig.path = "knitr_output/figures/")
-opts_chunk$set(fig.align = 'center', out.width = '4in', out.height = '3in')
+opts_chunk$set(fig.align = 'center', out.width = '90%')
 
 ### Hooks ###
 ## Crop plot margins
@@ -46,31 +46,88 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 ```
 
 
-# Guess my age
-
-```{r echo = FALSE}
-age <- rnorm(25, 35, 2)
-age <- c(27, 32, 29, 34, 32, 31, 33, 36, 35, 30, 33, 33, 34, 32, 34, 34, 34, 35, 35)
-```
-
-
-
-## Graph your estimates
 
 ```{r}
-hist(age)
+library(ggplot2)
+
+set.seed(88)
 ```
 
 
-## Do you think these data are good estimates of my age?
+
+## Measure trunk diameter (DBH) of 30 trees in your neighbourhood
+
+```{r}
+include_graphics("images/measuring_diam.JPG")
+```
+
+```{r echo=FALSE}
+library(dplyr)
+treediam <- data.frame(site = rep(1:20, each = 30)) %>% 
+  group_by(site) %>% 
+  mutate(tree = seq_len(30),
+         diam = round(rnorm(30, 25, 5), 1))
+```
+
+
+## Read data
+
+```{r echo = TRUE, eval=FALSE}
+treediam <- read.csv("treediam.csv")
+```
+
+## Data summary
+
+```{r echo = TRUE}
+summary(treediam)
+```
+
+
+## Visualisation of tree diameters
+
+```{r echo = TRUE}
+plot(treediam$diam)
+```
+
+
+## Visualisation of tree diameters
+
+```{r echo = TRUE}
+hist(treediam$diam)
+```
+
+
+---
+
+\Large
+
+HOW WELL DO THESE VALUES
+
+REPRESENT ACTUAL TREE DIAMETERS
+
+IN YOUR NEIGHBOURHOOD?
+
+\vspace{1cm}
+
+\normalsize 
 
 https://pollev.com/franciscorod726
 
-```{r out.height='2in', out.width='2in', echo=FALSE}
-hist(age)
-```
 
-Why / Why not?
+
+---
+
+\large
+
+- At what height did you measure?
+
+- Did you include bark?
+
+- Did you measure with tape, forceps, by eye?
+
+- When did you measure: dawn, midday, night? (trees may get thinner w/ high evapotranspiration)
+
+- Where did you measure? (differences among streets, species, etc)
 
 
 ---
@@ -79,53 +136,143 @@ Data are hardly ever objective.
 
 We decide **what to measure, when, where, and how**.
 
+\vspace{1cm}
+
 Always consider: 
 
-How well do these numbers reflect what we are trying to measure?
+**How well do numbers reflect what we are trying to measure?**
 
 
-## Summarise that distribution
 
-:::::::::::::: {.columns align=center .onlytextwidth}
+## How would you describe this distribution?
 
-::: {.column width="60%"}
-### Central tendency / location
-
-  - mean: 
-  $\dfrac {a_{1} + a_{2} + a_{3}} {n}$
-
-  - median (50% percentile)
-
-  - mode (most frequent value)
-
-
-### Variation / Spread
-
-  - min, max, range
-
-  - quantiles 
-      (quartiles, percentiles...)
-
-  - standard deviation: 
-  $SD = \sqrt {\dfrac {\sum \left( x-\mu\right) ^{2}}{n-1}}$
-
-  - standard error:
-  $SEM = \dfrac{SD} {\sqrt{n}}$
-
-  - coefficient of variation (CV = SD / mean)
-
-  - confidence intervals
-
-:::
-
-::: {.column width="40%" align=center}
-```{r out.width='1in', out.height='1in'}
-hist(age)
+```{r}
+hist(treediam$diam)
 ```
-:::
-::::::::::::::
+
+(Discuss with your partner)
 
 
+# Location / Central tendency
+
+## Mean / Average
+
+mean = $\dfrac {d_{1} + d_{2} + d_{3}} {n}$
+
+```{r}
+hist(treediam$diam)
+abline(v = mean(treediam$diam), lwd = 8, col = "red")
+```
+
+
+## Mean is sensitive to skew/outliers
+
+```{r}
+vec <- c(rnorm(50, 20, 5), 500, 500, 500)
+# vec <- rlnorm(500, 3, 3)
+hist(vec, breaks = 100, main = "", xlab = "")
+abline(v = mean(vec), lwd = 8, col = "red")
+```
+
+
+## Median
+
+50% percentile. Leaves half of the data values on each side
+
+```{r out.width="80%"}
+vec <- rlnorm(50, 3, 1)
+hist(vec, breaks = 100, main = "Red = Mean\nBlue = Median", xlab = "")
+abline(v = median(vec), lwd = 5, col = "blue")
+abline(v = mean(vec), lwd = 5, col = "red")
+```
+
+Median of c(2, 4, **6**, 8, 10) = 6
+
+Median of c(2, 4, 6, 8) = (4 + 6) / 2 = 5
+
+
+## Mode
+
+Most frequent value
+
+```{r}
+vals <- c(2, 4, 4, 4, 4, 6, 6, 8, 10)
+hist(vals, breaks = 1:10, main = "Mode = 4", xlab = "")
+```
+
+
+## Describing the location / central tendency
+
+```{r}
+set.seed(88)
+logvec <- data.frame(vec = rlnorm(1000, 3, 0.7))
+ggplot(logvec) +
+  theme_minimal() +
+  geom_histogram(aes(vec), size = 2, fill = "grey80") +
+  geom_vline(xintercept = mean(logvec$vec), lwd = 1, col = "red") +
+  geom_vline(xintercept = median(logvec$vec), lwd = 1, col = "blue") +
+  labs(x = "", y = "") +
+  annotate("text", x = 6, y = 230, label = "Mode", size = 6) +
+  annotate("text", x = 10, y = 20, label = "Median", colour = "blue", size = 6) +
+  annotate("text", x = 35, y = 20, label = "Mean", colour = "red", size = 6)
+```
+
+
+
+# Describing Variation / Spread
+
+## Minimum, Maximum, Range
+
+```{r}
+hist(treediam$diam, main = "", xlab = "")
+```
+
+Minimum = 9.2
+
+Maximum = 41.9
+
+Range = 9.2, 41.9
+
+
+## Quantiles
+
+Quartiles
+
+Percentiles
+
+```{r}
+p75 <- quantile(logvec$vec, probs = 0.75)
+ggplot(logvec) +
+  geom_density(aes(vec), size = 2, fill = "grey") +
+  theme_minimal() +
+  geom_vline(xintercept = p75, colour = "red", lwd = 2) +
+  annotate("text", x = 50, y = 0.03, label = "Percentile 75", colour = "red", hjust = 0, size = 6) +
+  annotate("text", x = 50, y = 0.025, label = "75% of data to the left\n25% to the right", 
+           colour = "red", size = 5, hjust = 0)
+```
+
+
+## Standard Deviation
+
+Average distance between data points and the mean
+
+$SD = \sqrt {\dfrac {\sum \left( x-\mu\right) ^{2}}{n-1}}$
+
+
+
+
+## In a Normal distribution
+
+![](images/gaussian.png)
+
+
+
+
+## Standard Error of the Mean
+
+$SEM = \dfrac{SD} {\sqrt{n}}$
+
+Estimates uncertainty (spread) of the parameter 'mean'
 
 
 ## Relationship between SD and SEM
@@ -155,10 +302,68 @@ include_graphics("images/SD-SEM.PNG")
 
 
 
+## Coefficient of Variation
 
-## In a Normal distribution
+$CV = \dfrac{SD} {mean}$
 
-![](images/gaussian.png)
+Facilitates comparing the spread of distributions with very different means
+
+```{r}
+d1 <- rnorm(100, 20, 5)
+d2 <- rnorm(100, 100, 5)
+df <- data.frame(d1 = d1, d2 = d2)
+ggplot(df) +
+  geom_density(aes(d1), fill = "grey90") +
+  geom_density(aes(d2), fill = "grey90") +
+  theme_minimal() +
+  scale_x_continuous(limits = c(-10, 130)) +
+  labs(x = "", y = "") +
+  theme(axis.text.y = element_blank(),
+        axis.text.x = element_text(size = 14)) +
+  annotate("text", x = 30, y = 0.07, 
+           label = "Mean = 20\nSD = 5\nCV = 0.25", hjust = 0, size = 5) +
+    annotate("text", x = 65, y = 0.03, 
+           label = "Mean = 100\nSD = 5\nCV = 0.05", hjust = 0, size = 5)
+```
+
+
+## Summarise a distribution
+
+:::::::::::::: {.columns align=center .onlytextwidth}
+
+::: {.column width="60%"}
+### Central tendency / location
+
+  - mean (average)
+
+  - median (50% percentile)
+
+  - mode (most frequent value)
+
+
+### Variation / Spread
+
+  - min, max, range
+
+  - quantiles 
+      (quartiles, percentiles...)
+
+  - standard deviation: 
+
+  - standard error of the mean:
+
+  - coefficient of variation (CV = SD / mean)
+
+:::
+
+::: {.column width="40%" align=top}
+```{r out.width='1in', out.height='1in'}
+hist(treediam$diam)
+```
+:::
+::::::::::::::
+
+
 
 
 
