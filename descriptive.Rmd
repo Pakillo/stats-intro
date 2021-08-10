@@ -4,11 +4,13 @@ output:
   binb::metropolis:
     incremental: yes
     fig_caption: no
+    pandoc_args: ["--lua-filter=hideslide.lua"]
 fontsize: 10pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
   - \definecolor{shadecolor}{RGB}{230,230,230}
+aspectratio: 43  # use 169 for wide format
 ---
 
 
