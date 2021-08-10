@@ -4,11 +4,13 @@ output:
   binb::metropolis:
     incremental: yes
     fig_caption: no
+    pandoc_args: ["--lua-filter=hideslide.lua"]
 fontsize: 10pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
   - \definecolor{shadecolor}{RGB}{230,230,230}
+aspectratio: 43  # use 169 for wide format
 ---
 
 
@@ -29,7 +31,7 @@ opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, cro
 
 # ## Plots
 # opts_chunk$set(fig.path = "knitr_output/figures/")
-opts_chunk$set(fig.align = 'center', out.width = '4in', out.height = '3in')
+opts_chunk$set(fig.align = 'center', out.width = '80%')
 
 ### Hooks ###
 ## Crop plot margins
@@ -59,19 +61,21 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 - **Alternative hypothesis**: groups are different.
 
 
-## In ecology, everything is somewhat different
+## In biology, everything is somewhat different
 
-```{r echo=FALSE, out.height='3in', out.width='4in'}
+```{r echo=FALSE, out.width='95%'}
 include_graphics("images/Abrain_nonsense.png")
 ```
 
 ## What is the p-value?
 
-- The probability that the data were produced by random chance alone
+- The probability that the observed data were produced by chance 
 
-- The probability of getting results at least as extreme as the ones you observed if H0 was true
+- The probability of getting results at least as extreme as observed if H0 was true
 
 - The probability of null hypothesis being true
+
+- The probability of alternative hypothesis being true
 
 https://pollev.com/franciscorod726
 
@@ -123,15 +127,15 @@ knitr::include_graphics("images/nature_significance.PNG")
 https://doi.org/10.1038/d41586-019-00857-9
 
 
-## Are the heights of local and non-local students different?
+## Are these two groups different?
 
 ```{r echo=FALSE}
-h.sevi <- round(rnorm(5, 170, 10))
-h.out <- round(rnorm(10, 178, 10))
+group.A <- round(rnorm(5, 170, 10))
+group.B <- round(rnorm(10, 178, 10))
 ```
 
 ```{r echo = TRUE}
-t.test(h.sevi, h.out)
+t.test(group.A, group.B)
 ```
 
 https://pollev.com/franciscorod726
@@ -156,17 +160,7 @@ https://pollev.com/franciscorod726
 **Power**: Probability of detecting true difference (rejecting H0 when it's false).
 
 
-
-
-
-
-## Understanding NHST
-
-http://rpsychologist.com/d3/NHST/
-
-
-
-## Example: biased coin
+## Is this coin biased?
 
 ```{r coin, echo = 4}
 ntrials <- 10
@@ -180,14 +174,158 @@ test
 https://pollev.com/franciscorod726
 
 
-## Correlation between variables
-
-http://rpsychologist.com/d3/correlation/
 
 
 
+## Understanding NHST
 
-# Common pitfalls and good practice
+http://rpsychologist.com/d3/NHST/
+
+
+# NHST and p-values:\nCommon pitfalls
+
+## P-value depends on sample size
+
+```{r out.height='3in', out.width='4in'}
+include_graphics("images/pvalue_SS_Motulski.jpg")
+```
+
+https://doi.org/10.1002/prp2.93
+
+
+
+
+## P-value depends on sample size
+
+Same real difference is detected as significant or not depending on sample size:
+
+![](images/smallSS.png)
+
+
+## Statistically significant != biologically important
+
+With big sample size, we can find **highly significant but biologically unimportant** differences.
+
+```{r out.height='2.5in', out.width='3.5in'}
+include_graphics("images/bigSS.png")
+```
+
+
+
+## Statistically significant != biologically important
+
+- Statistically significant = unlikely to be zero
+
+- Good read: [*significantly misleading*](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
+
+- My suggestion: avoid significant/not significant (perhaps p-values too)
+
+- Beyond significance, look at *effect sizes*.
+
+
+
+
+
+## 'Not significant' does NOT mean 'there is no effect'
+
+![](images/CIs.png)
+
+
+- **Absence of evidence != Evidence of absence**
+
+
+
+## Failure to reject H0 != H0 is true
+
+![](images/CIoverlap.png)
+
+
+## p-value > 0.05?
+
+- "We were **unable to find evidence** against the hypothesis that A = B **with the current sample size**" ([Harrell](https://discourse.datamethods.org/t/language-for-communicating-frequentist-results-about-treatment-effects/934))
+
+- "Differences between groups were **not statistically clear**" ([Dushoff et al](https://doi.org/10.1111/2041-210X.13159))
+
+
+## Is it safe to allow right turn with red lights?
+
+- Right turn not allowed: 308 accidents
+
+- Right turn allowed: 337 accidents
+
+- No *significant* difference, hence safe
+
+- Misinterpretation of underpowered study cost lives
+
+https://www.statisticsdonewrong.com/power.html#the-wrong-turn-on-red
+
+
+
+
+## 0.05 is an arbitrary threshold
+
+![](images/gelman_signif.png)
+
+http://dx.doi.org/10.1198/000313006X152649
+
+
+
+## Multiple hypothesis testing
+
+```{r out.width="100%"}
+include_graphics("images/xkcd_testing.png")
+```
+
+
+## How to make your results significant: *p-hacking*
+
+```{r out.height='3in', out.width='5in'}
+include_graphics("images/phacking_Motulski.jpg")
+```
+
+http://dx.doi.org/10.1002/prp2.93
+
+
+## How to make your results significant: *p-hacking*
+
+1. Test multiple variables, then report the ones that are significant.
+
+2. Artificially choose when to end your experiment.
+
+3. Add covariates until effects are significant.
+
+4. Test different conditions (e.g. different levels of a factor) and report the ones you like.
+
+- To read more: [Simmons et al 2011](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1850704)
+
+
+::: hide :::
+## How to make your results significant: *p-hacking*
+
+https://www.youtube.com/watch?v=ZaNtz76dNSI
+:::
+
+
+## ASA statement on p-values
+
+- P-values do not measure the **probability of hypothesis** being true, or the probability that the data were produced by **random chance** alone.
+
+- Scientific conclusions or policy decisions should NOT be based only on **whether a
+p-value passes a specific threshold**.
+
+- P-value, or statistical significance, does not measure the **size of an effect** or the **importance** of a result.
+
+- By itself, a p-value does NOT provide a good **measure of evidence** regarding a model or hypothesis.
+
+
+https://doi.org/10.1080/00031305.2016.1154108
+
+
+
+
+
+# Good practice
+
 
 ## A must read
 
@@ -218,19 +356,47 @@ https://doi.org/10.1038/503335a
 
 
 
+## The New Statistics
+
+Aim for estimation of effects and their uncertainty (SE, CI...)
+
+![](images/cumming.png)
+
+http://dx.doi.org/10.1177/0956797613504966
+
+
+
+## Instead of falsifying null model, compare meaningful models
+
+```{r echo=FALSE, out.height='2.5in', out.width='2.5in'}
+include_graphics("images/science_process.jpg")
+```
+
+https://doi.org/10.1242/jeb.104976
+
+
+
+## How many types of errors?
+
+- **Type I**: False positive (incorrect rejection of null hypothesis).
+
+- **Type II**: False negative (failure to reject false null hypothesis).
+
+- **Type S (Sign)**: estimating effect in opposite direction.
+
+- **Type M (Magnitude)**: Misestimating magnitude of the effect (under or overestimating).
+
+- [Beyond Power Calculations: Assessing 
+Type S (Sign) and Type M (Magnitude) 
+Errors](http://www.stat.columbia.edu/~gelman/research/published/retropower_final.pdf)
+
+
+
+
+
 # Visualisation of data and models is key 
 
-## First things first
-
-- Always 
-
-- Always 
-
-- Always
-
-
-
-## Plot data and models
+## Always plot data and models
 
 ![](images/anscombe.png)
 
@@ -311,188 +477,6 @@ http://tylervigen.com/spurious-correlations
 ```{r out.height='3in', out.width='4in'}
 include_graphics("images/xkcd_correlation.png")
 ```
-
-
-
-
-# NHST and p-values
-
-## In ecology, everything is somewhat different
-
-```{r echo=FALSE, out.height='3in', out.width='4in'}
-include_graphics("images/Abrain_nonsense.png")
-```
-
-
-## Instead of falsifying null model, compare meaningful models
-
-```{r echo=FALSE, out.height='2.5in', out.width='2.5in'}
-include_graphics("images/science_process.jpg")
-```
-
-https://doi.org/10.1242/jeb.104976
-
-
-## P-value depends on sample size
-
-```{r out.height='3in', out.width='4in'}
-include_graphics("images/pvalue_SS_Motulski.jpg")
-```
-
-https://doi.org/10.1002/prp2.93
-
-
-
-
-## P-value depends on sample size
-
-Same real difference is detected as significant or not depending on sample size:
-
-![](images/smallSS.png)
-
-
-## Statistically significant != biologically important
-
-With big sample size, we can find **highly significant but biologically unimportant** differences.
-
-```{r out.height='2.5in', out.width='3.5in'}
-include_graphics("images/bigSS.png")
-```
-
-
-
-## Statistically significant != biologically important
-
-- Statistically significant = unlikely to be zero
-
-- Good read: [*significantly misleading*](http://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
-
-- My suggestion: avoid significant/not significant (and maybe p-values too)
-
-- Beyond significance, look at *effect sizes*.
-
-
-
-
-
-## 'Not significant' does NOT mean 'there is no effect'
-
-![](images/CIs.png)
-
-
-- **Absence of evidence != Evidence of absence**
-
-
-
-## Failure to reject H0 != H0 is true
-
-![](images/CIoverlap.png)
-
-
-## p-value > 0.05?
-
-- "We were **unable to find evidence** against the hypothesis that A = B **with the current sample size**" ([Harrell](https://discourse.datamethods.org/t/language-for-communicating-frequentist-results-about-treatment-effects/934))
-
-- "Differences between groups were **not statistically clear**" ([Dushoff et al](https://doi.org/10.1111/2041-210X.13159))
-
-
-## Is it safe to allow right turn with red lights?
-
-- Right turn not allowed: 308 accidents
-
-- Right turn allowed: 337 accidents
-
-- No *significant* difference, hence safe
-
-- Misinterpretation of underpowered study cost lives
-
-https://www.statisticsdonewrong.com/power.html#the-wrong-turn-on-red
-
-
-
-
-## 0.05 is an arbitrary threshold
-
-![](images/gelman_signif.png)
-
-http://dx.doi.org/10.1198/000313006X152649
-
-
-
-## Multiple hypothesis testing
-
-![](images/xkcd_testing.png)
-
-
-## How to make your results significant: *p-hacking*
-
-```{r out.height='3in', out.width='5in'}
-include_graphics("images/phacking_Motulski.jpg")
-```
-
-http://dx.doi.org/10.1002/prp2.93
-
-
-## How to make your results significant: *p-hacking*
-
-1. Test multiple variables, then report the ones that are significant.
-
-2. Artificially choose when to end your experiment.
-
-3. Add covariates until effects are significant.
-
-4. Test different conditions (e.g. different levels of a factor) and report the ones you like.
-
-- To read more: [Simmons et al 2011](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1850704)
-
-
-## How to make your results significant: *p-hacking*
-
-https://www.youtube.com/watch?v=ZaNtz76dNSI
-
-
-
-## ASA statement on p-values
-
-- P-values do not measure the **probability of hypothesis** being true, or the probability that the data were produced by **random chance** alone.
-
-- Scientific conclusions or policy decisions should NOT be based only on **whether a
-p-value passes a specific threshold**.
-
-- P-value, or statistical significance, does not measure the **size of an effect** or the **importance** of a result.
-
-- By itself, a p-value does NOT provide a good **measure of evidence** regarding a model or hypothesis.
-
-
-https://doi.org/10.1080/00031305.2016.1154108
-
-
-
-
-
-## The New Statistics
-
-Aim for estimation of effects and their uncertainty (SE, CI...)
-
-![](images/cumming.png)
-
-http://dx.doi.org/10.1177/0956797613504966
-
-
-
-## How many types of errors?
-
-- **Type I**: False positive (incorrect rejection of null hypothesis).
-
-- **Type II**: False negative (failure to reject false null hypothesis).
-
-- **Type S (Sign)**: estimating effect in opposite direction.
-
-- **Type M (Magnitude)**: Misestimating magnitude of the effect (under or overestimating).
-
-- [Beyond Power Calculations: Assessing 
-Type S (Sign) and Type M (Magnitude) 
-Errors](http://www.stat.columbia.edu/~gelman/research/published/retropower_final.pdf)
 
 
 
