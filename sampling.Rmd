@@ -4,11 +4,13 @@ output:
   binb::metropolis:
     incremental: yes
     fig_caption: no
+    pandoc_args: ["--lua-filter=hideslide.lua"]
 fontsize: 10pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
   - \definecolor{shadecolor}{RGB}{230,230,230}
+aspectratio: 43  # use 169 for wide format
 ---
 
 
@@ -29,7 +31,7 @@ opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, cro
 
 # ## Plots
 # opts_chunk$set(fig.path = "knitr_output/figures/")
-opts_chunk$set(fig.align = 'center', out.width = '4in', out.height = '3in')
+opts_chunk$set(fig.align = 'center', out.width = '90%')
 
 ### Hooks ###
 ## Crop plot margins
@@ -48,13 +50,34 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ## Inference: from samples to population
 
-We rarely measure the whole **population**, but take **samples** instead.
+We rarely measure the whole **population**, but take **samples**.
 
-![](images/olivar.png)
+Then we make inferences from sample to population.
+
+```{r out.width='80%'}
+include_graphics("images/citytrees.jpg")
+```
 
 
+## If we sample 30 trees in our neighbourhood...
 
+::: nonincremental :::
+Can we extrapolate results to 
 
+  - whole neighbourhood?
+  
+  - whole city?
+  
+  - whole country?
+  
+  - the world?
+  
+
+What’s the **suitable population** to make inferences given this sample?
+
+:::
+
+::: hide :::
 ## What's the average height in this group?
 
 1. Write down your height and place of origin (Sevilla or other) in a piece of paper and put it in the bag.
@@ -67,24 +90,7 @@ We rarely measure the whole **population**, but take **samples** instead.
 
 5. Do all CIs contain true mean height?
 
-
-## If the 95% CI of X is (120, 150)...
-
-
-- There is a 95% probability that X lies between 120 and 150
-
-- We can be 95% confident that X lies between 120 and 150
-
-- If we repeated the experiment, 95% of the time X would fall between 120 and 150
-
-- If we repeated the experiment, 95% of the CIs would contain the true value of X
-
-- The probability that X is greater than 0 is at least 95%
-
-- The probability that X equals 0 is smaller than 5%
-
-
-https://pollev.com/franciscorod726
+:::
 
 
 
@@ -117,6 +123,25 @@ https://rpsychologist.com/d3/CI/
 - but still 5% of CIs will NOT contain true mean!
 
 
+## If the 95% CI of X is (120, 150)...
+
+
+- There is a 95% probability that X lies between 120 and 150
+
+- We can be 95% confident that X lies between 120 and 150
+
+- If we repeated the experiment, 95% of the time X would fall between 120 and 150
+
+- If we repeated the experiment, 95% of the CIs would contain the true value of X
+
+- The probability that X is greater than 0 is at least 95%
+
+- The probability that X equals 0 is smaller than 5%
+
+
+https://pollev.com/franciscorod726
+
+
 
 
 ## Bayesian credible intervals
@@ -134,6 +159,26 @@ $P(H|D) \propto P(D|H) \cdot P(H)$
 $Posterior \propto Likelihood \cdot Prior$
 
 ```{r echo = FALSE, results='hide'}
+
+set.seed(28)
+# example with tree diameters
+diam.sd <- 30
+diam <- rnorm(8, 100, diam.sd)
+
+prior.diam <- 40
+prior.diam.var <- 50
+
+library(blmeco)
+blmeco::triplot.normal.knownvariance(theta.data = mean(diam), 
+                                     n = length(diam), 
+                                     variance.known = diam.sd*diam.sd, 
+                                     prior.theta = prior.diam, 
+                                     prior.variance = prior.diam.var)
+title("Tree diameter in your neighbourhood")
+```
+
+
+```{r echo = FALSE, results='hide', eval=FALSE}
 
 # height <- runif(10, 170, 190)
 # 
@@ -157,12 +202,11 @@ blmeco::triplot.normal.knownvariance(theta.data = mean(sleephours),
 title("How many hours of daily sleep?")
 ```
 
-
 ## What is the likelihood?
 
 $L(\theta|x) = P(x|\theta)$
 
-```{r echo=FALSE, out.height='3in', out.width='4in'}
+```{r echo=FALSE}
 include_graphics("images/likelihood.PNG")
 ```
 
@@ -173,22 +217,21 @@ https://seeing-theory.brown.edu/bayesian-inference/index.html
 
 ```{r echo = FALSE, results='hide'}
 
-set.seed(123)
+set.seed(28)
+# example with tree diameters
+diam.sd <- 30
+diam <- rnorm(8, 100, diam.sd)
 
-# example with students' hours of sleep
-sleephours.sd <- 2
-sleephours <- rnorm(8, 9, sleephours.sd)
-
-prior.sleep <- 7
-prior.sleep.var <- 1
+prior.diam <- 40
+prior.diam.var <- 50
 
 library(blmeco)
-blmeco::triplot.normal.knownvariance(theta.data = mean(sleephours), 
-                                     n = length(sleephours), 
-                                     variance.known = sleephours.sd*sleephours.sd, 
-                                     prior.theta = prior.sleep, 
-                                     prior.variance = prior.sleep.var)
-title("How many hours of daily sleep?")
+blmeco::triplot.normal.knownvariance(theta.data = mean(diam), 
+                                     n = length(diam), 
+                                     variance.known = diam.sd*diam.sd, 
+                                     prior.theta = prior.diam, 
+                                     prior.variance = prior.diam.var)
+title("Tree diameter in your neighbourhood (n = 8)")
 ```
 
 
@@ -196,22 +239,21 @@ title("How many hours of daily sleep?")
 
 ```{r echo = FALSE, results='hide'}
 
-set.seed(123)
+set.seed(28)
+# example with tree diameters
+diam.sd <- 30
+diam <- rnorm(100, 100, diam.sd)
 
-# example with students' hours of sleep
-sleephours.sd <- 2
-sleephours <- rnorm(30, 9, sleephours.sd)
-
-prior.sleep <- 7
-prior.sleep.var <- 1
+prior.diam <- 40
+prior.diam.var <- 50
 
 library(blmeco)
-blmeco::triplot.normal.knownvariance(theta.data = mean(sleephours), 
-                                     n = length(sleephours), 
-                                     variance.known = sleephours.sd*sleephours.sd, 
-                                     prior.theta = prior.sleep, 
-                                     prior.variance = prior.sleep.var)
-title("How many hours of daily sleep?")
+blmeco::triplot.normal.knownvariance(theta.data = mean(diam), 
+                                     n = length(diam), 
+                                     variance.known = diam.sd*diam.sd, 
+                                     prior.theta = prior.diam, 
+                                     prior.variance = prior.diam.var)
+title("Tree diameter in your neighbourhood (n = 100)")
 ```
 
 
