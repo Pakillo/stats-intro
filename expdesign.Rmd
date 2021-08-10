@@ -4,11 +4,13 @@ output:
   binb::metropolis:
     incremental: yes
     fig_caption: no
+    pandoc_args: ["--lua-filter=hideslide.lua"]
 fontsize: 10pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
   - \definecolor{shadecolor}{RGB}{230,230,230}
+aspectratio: 43  # use 169 for wide format
 ---
 
 
@@ -29,7 +31,7 @@ opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, cro
 
 # ## Plots
 # opts_chunk$set(fig.path = "knitr_output/figures/")
-opts_chunk$set(fig.align = 'center', out.width = '4in', out.height = '3in')
+opts_chunk$set(fig.align = 'center', out.width = '80%')
 
 ### Hooks ###
 ## Crop plot margins
@@ -102,11 +104,44 @@ include_graphics("images/ssize-pvalue.png")
 
 - Plan model/statistical analysis **before** data collection.
 
-- **Do simulations**. Power/Sample size/Precision analyses (e.g.[this](https://doi.org/10.1136/bmj.m441), [this](https://doi.org/10.1111/2041-210X.12504) or [this](https://precisely.malco.io/)).
+- **Do simulations**. Power/Sample size/Precision analyses (e.g. see papers like [this](https://doi.org/10.1136/bmj.m441) & [this](https://doi.org/10.1111/2041-210X.12504), or software like [this](https://cran.r-project.org/package=pmsampsize) & [this](https://precisely.malco.io/)).
 
 - Plan to have at least **10-30 observations per predictor**.
 
 - Complex models (w/ many predictors, interactions etc) require **high** sample sizes.
+
+
+## Sample size estimation
+
+Calculating sample size for Gaussian (Normal) response model:
+
+  - expected mean: 30
+  - expected sd: 10
+  - 10 parameters (predictors)
+  - expected R-squared: 0.2
+
+```{r echo = TRUE}
+library(pmsampsize)
+pmsampsize(type = "c", parameters = 10, intercept = 30, sd = 10, rsquared = 0.2)
+```
+
+
+## Sample size estimation
+
+Calculating sample size for binary response model:
+
+  - expected prevalence: 0.1
+  - 20 parameters (predictors)
+  - expected R-squared: 0.2
+
+```{r echo = TRUE}
+library(pmsampsize)
+pmsampsize(type = "b", parameters = 20, prevalence = 0.1, rsquared = 0.2)
+```
+
+
+
+
 
 
 # Randomization
