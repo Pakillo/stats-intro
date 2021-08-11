@@ -1,17 +1,14 @@
 ---
 title: "Why statistics?"
 output:
-  beamer_presentation:
+  binb::metropolis:
     incremental: yes
     fig_caption: no
+fontsize: 12pt
+urlcolor: blue
+linkcolor: blue
 header-includes:
-  - \def\begincols{\begin{columns}[c]}
-  - \def\endcols{\end{columns}}
-  - \def\begincol{\begin{column}{0.48\textwidth}}
-  - \def\endcol{\end{column}} 
-  - \setlength{\emergencystretch}{0em}
-  - \setlength{\parskip}{0pt}
-fontsize: 10pt
+  - \definecolor{shadecolor}{RGB}{230,230,230}
 ---
 
 
@@ -23,17 +20,13 @@ library(knitr)
 ### Chunk options ###
 
 ## Text results
-opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ## Code decoration
 opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE)
 
-# ## Cache
-opts_chunk$set(cache = 2, cache.path = "knitr_output/cache/")
-
 # ## Plots
 opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
-
 
 ```
 
@@ -56,21 +49,16 @@ opts_chunk$set(fig.path = "knitr_output/figures/", fig.align = 'center')
 
 ## To get answers to tough problems
 
-For example...
-
-
-----
-
-![](images/forest.png)
+```{r }
+include_graphics("images/forest.png")
+```
 
 
 ## Inferring tree fecundity
 
-![](images/treefecundity.png)
-
-
-
-
+```{r }
+include_graphics("images/treefecundity.png")
+```
 
 
 ## Course goals
@@ -84,10 +72,11 @@ For example...
 
 ----
 
-> **The purpose of models is not to fit data but to sharpen thinking**
+> **The purpose of models is not to fit data\newline but to sharpen thinking**
 
+\raggedright
 Sam Karlin
-
+\raggedleft
 
 
 ## Topics
