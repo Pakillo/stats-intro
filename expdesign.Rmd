@@ -31,7 +31,7 @@ opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, cro
 
 # ## Plots
 # opts_chunk$set(fig.path = "knitr_output/figures/")
-opts_chunk$set(fig.align = 'center', out.width = '80%')
+opts_chunk$set(fig.align = 'center', out.width = '90%')
 
 ### Hooks ###
 ## Crop plot margins

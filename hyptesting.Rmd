@@ -5,7 +5,7 @@ output:
     incremental: yes
     fig_caption: no
     pandoc_args: ["--lua-filter=hideslide.lua"]
-fontsize: 10pt
+fontsize: 12pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
@@ -31,7 +31,7 @@ opts_chunk$set(tidy = FALSE, comment = NA, highlight = TRUE, prompt = FALSE, cro
 
 # ## Plots
 # opts_chunk$set(fig.path = "knitr_output/figures/")
-opts_chunk$set(fig.align = 'center', out.width = '80%')
+opts_chunk$set(fig.align = 'center', out.width = '90%')
 
 ### Hooks ###
 ## Crop plot margins
@@ -86,9 +86,9 @@ https://pollev.com/franciscorod726
 
 - Probability of observing data as or more extreme than these *if H0 was true*.
 
-- Low P-value: data unlikely if H0 was true.
+- **Low P-value**: data unlikely if H0 was true.
 
-- Large P-value: data not unusual if H0 was true.
+- **Large P-value**: data not unusual if H0 was true.
 
 
 
@@ -108,15 +108,15 @@ https://pollev.com/franciscorod726
 
 ## Are differences *significant*?
 
+Common practice:
+
 - If p < 0.05, we **reject** H0.
 
 - If p > 0.05, we **fail to reject** H0
 
 - (which is **NOT** the same as 'H0 is true')
 
-- **CAUTION:**
-
-- P-value is continuous. We must **avoid binary decisions** based on **arbitrary thresholds**.
+- **CAUTION:** P-value is continuous. We must **avoid binary decisions** based on **arbitrary thresholds**.
 
 . . . 
 
@@ -124,10 +124,13 @@ https://pollev.com/franciscorod726
 knitr::include_graphics("images/nature_significance.PNG")
 ```
 
-https://doi.org/10.1038/d41586-019-00857-9
+\footnotesize https://doi.org/10.1038/d41586-019-00857-9
+
 
 
 ## Are these two groups different?
+
+\footnotesize 
 
 ```{r echo=FALSE}
 group.A <- round(rnorm(5, 170, 10))
@@ -157,10 +160,12 @@ https://pollev.com/franciscorod726
 ![](images/staterrors.png)
 
  
-**Power**: Probability of detecting true difference (rejecting H0 when it's false).
+\footnotesize POWER: Probability of detecting true difference (rejecting H0 when it's false).
 
 
 ## Is this coin biased?
+
+\footnotesize
 
 ```{r coin, echo = 4}
 ntrials <- 10
@@ -181,23 +186,117 @@ https://pollev.com/franciscorod726
 
 http://rpsychologist.com/d3/NHST/
 
+http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html
 
-# NHST and p-values:\nCommon pitfalls
+
+# NHST and p-values:\newline common pitfalls
+
+## A significant p-value does not mean we found a true difference
+
+Particularly with low sample sizes
+
+```{r out.width="95%"}
+library(ggplot2)
+library(patchwork)
+
+set.seed(8)
+xdist <- rnorm(1000, 50, 15)
+ydist <- rnorm(1000, 50, 15)
+dist <- data.frame(group = rep(c("A", "B"), each = 1000), 
+                   value = c(xdist, ydist))
+p1 <- ggplot(dist) +
+  geom_density(aes(value, fill = group), alpha = 0.3) +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 100)) +
+  labs(title = "Two groups have same distribution") 
+
+xsamp <- sample(xdist, 10)
+ysamp <- sample(ydist, 10)
+samp <- data.frame(group = rep(c("A", "B"), each = 10),
+                   value = c(xsamp, ysamp))
+
+tt <- t.test(xsamp, ysamp)
+
+p2 <- ggplot(samp) +
+  geom_histogram(aes(value, fill = group)) +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 100)) +
+  labs(title = "Sampling 10 individuals from each group and making t-test",
+       y = "count") +
+  annotate("text", x = 70, y = 3, hjust = 0, size = 8,
+           label = paste0("p = ", round(tt$p.value, 3)))
+
+p1/p2
+
+# m <- lm(vals ~ samp, data = samp)
+# summary(m)
+# visreg::visreg(m)
+```
+
+
+## If sample size was larger...
+
+
+```{r out.width="100%"}
+
+set.seed(8)
+xdist <- rnorm(1000, 50, 15)
+ydist <- rnorm(1000, 50, 15)
+dist <- data.frame(group = rep(c("A", "B"), each = 1000), 
+                   value = c(xdist, ydist))
+p1 <- ggplot(dist) +
+  geom_density(aes(value, fill = group), alpha = 0.3) +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 100)) +
+  labs(title = "Two groups have same distribution") 
+
+xsamp <- sample(xdist, 500)
+ysamp <- sample(ydist, 500)
+samp <- data.frame(group = rep(c("A", "B"), each = 500),
+                   value = c(xsamp, ysamp))
+
+tt <- t.test(xsamp, ysamp)
+
+p2 <- ggplot(samp) +
+  geom_histogram(aes(value, fill = group)) +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 100)) +
+  labs(title = "Sampling 500 individuals from each group and making t-test",
+       y = "count") +
+  annotate("text", x = 75, y = 80, hjust = 0, size = 6,
+           label = paste0("p = ", round(tt$p.value, 3)))
+
+p1/p2
+
+```
+
+
+---
+
+\Large
+With low sample size (power),\newline significant p-values\newline are most likely overestimates
+
+\vspace{1cm}
+
+\raggedright 
+\footnotesize [Loken & Gelman 2014](https://doi.org/10.1126/science.aal3618), [Vasisth et al. 2018](https://doi.org/10.1016/j.jml.2018.07.004)
+\raggedleft
+
 
 ## P-value depends on sample size
 
-```{r out.height='3in', out.width='4in'}
+```{r }
 include_graphics("images/pvalue_SS_Motulski.jpg")
 ```
 
-https://doi.org/10.1002/prp2.93
+\footnotesize https://doi.org/10.1002/prp2.93
 
 
 
 
 ## P-value depends on sample size
 
-Same real difference is detected as significant or not depending on sample size:
+Same real difference is detected as **significant or not depending on sample size**
 
 ![](images/smallSS.png)
 
@@ -211,6 +310,17 @@ include_graphics("images/bigSS.png")
 ```
 
 
+## Statistically significant != biologically important
+
+```{r}
+set.seed(1)
+x <- rnorm(10000,0,1)
+y <- rnorm(10000,0,1) + x/44
+plot(x,y,col=rgb(.5,0,0,.25),pch=19,cex=.5, main = "p = 0.005", cex.main = 3)
+abline(lm(y~x),lwd=2)
+#https://twitter.com/CaAl/status/908322681958920192?s=20
+```
+
 
 ## Statistically significant != biologically important
 
@@ -220,7 +330,7 @@ include_graphics("images/bigSS.png")
 
 - My suggestion: avoid significant/not significant (perhaps p-values too)
 
-- Beyond significance, look at *effect sizes*.
+- Beyond significance, look at *effect sizes* and their uncertainty.
 
 
 
@@ -283,10 +393,12 @@ include_graphics("images/xkcd_testing.png")
 include_graphics("images/phacking_Motulski.jpg")
 ```
 
-http://dx.doi.org/10.1002/prp2.93
+\tiny http://dx.doi.org/10.1002/prp2.93
 
 
 ## How to make your results significant: *p-hacking*
+
+\footnotesize
 
 1. Test multiple variables, then report the ones that are significant.
 
@@ -299,6 +411,11 @@ http://dx.doi.org/10.1002/prp2.93
 - To read more: [Simmons et al 2011](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1850704)
 
 
+## p-hacking: try it yourself
+
+https://www.shinyapps.org/apps/p-hacker/
+
+
 ::: hide :::
 ## How to make your results significant: *p-hacking*
 
@@ -307,6 +424,8 @@ https://www.youtube.com/watch?v=ZaNtz76dNSI
 
 
 ## ASA statement on p-values
+
+\footnotesize
 
 - P-values do not measure the **probability of hypothesis** being true, or the probability that the data were produced by **random chance** alone.
 
@@ -352,7 +471,7 @@ Also http://www.statisticsdonewrong.com/
 include_graphics("images/Sutherland_tips.png")
 ```
 
-https://doi.org/10.1038/503335a
+\tiny https://doi.org/10.1038/503335a
 
 
 
@@ -389,94 +508,6 @@ https://doi.org/10.1242/jeb.104976
 - [Beyond Power Calculations: Assessing 
 Type S (Sign) and Type M (Magnitude) 
 Errors](http://www.stat.columbia.edu/~gelman/research/published/retropower_final.pdf)
-
-
-
-
-
-# Visualisation of data and models is key 
-
-## Always plot data and models
-
-![](images/anscombe.png)
-
-
-## Don't use statistics blindly: *Visualise*
-
-```{r out.height='3in', out.width='4in'}
-include_graphics("images/correlations.png")
-```
-
-https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
-
-
-
-## Don't use statistics blindly: *Visualise*
-
-```{r out.height='3in', out.width='4in'}
-include_graphics("images/correlations2.png")
-```
-
-https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
-
-
-
-## Don't use statistics blindly: *Visualise*
-
-```{r out.height='3in', out.width='4in'}
-include_graphics("images/correlations3.png")
-```
-
-https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like
-
-
-
-----
-
-> **Plot. Check models. Plot. Check assumptions. Plot.**
-
-\raggedright
-\scriptsize [Lavine 2014 *Ecology*](http://dx.doi.org/10.1890/13-1112.1)
-\raggedleft
-
-
-
-
-# Inference from observational studies
-
-
-## News: Hamburgers increase risk of heart attack
-
-- In a sample of 10,000 people, it was found that people eating >2 hamburgers a week had 20% higher probability of heart attack.
-
-- **Do hamburgers increase heart attacks?**
-
-- https://pollev.com/franciscorod726
-
-
-
-## Bigger flowers increase reproductive success
-
-- We found that plants with big flowers produced 30% more seeds...
-
-- **Do big flowers increase reproductive success?**
-
-- https://pollev.com/franciscorod726
-
-
-
-## Correlation vs Causation
-
-![](images/spurious-corr-margarine.png)
-
-http://tylervigen.com/spurious-correlations
-
-
-## Learning statistics through xkcd
-
-```{r out.height='3in', out.width='4in'}
-include_graphics("images/xkcd_correlation.png")
-```
 
 
 

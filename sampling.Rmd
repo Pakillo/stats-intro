@@ -210,7 +210,7 @@ $L(\theta|x) = P(x|\theta)$
 include_graphics("images/likelihood.PNG")
 ```
 
-https://seeing-theory.brown.edu/bayesian-inference/index.html
+\tiny https://seeing-theory.brown.edu/bayesian-inference/index.html
 
 
 ## Bayesian inference: prior and likelihood produce posterior

@@ -1,7 +1,5 @@
 ---
-title: "An introduction to statistical inference"
-author: "Francisco Rodríguez-Sánchez"
-date: "https://frodriguezsanchez.net"
+title: "Inference from observational studies"
 output:
   binb::metropolis:
     incremental: yes
@@ -16,7 +14,7 @@ aspectratio: 43  # use 169 for wide format
 ---
 
 
-```{r knitr_setup, include=FALSE, cache=FALSE}
+```{r include=FALSE, cache=FALSE}
 
 library("knitr")
 
@@ -51,57 +49,46 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 
 
-# Why statistics?
+## News: Hamburgers increase risk of heart attack
 
-```{r intro, child = 'intro.Rmd'}
+- In a sample of 10,000 people, it was found that people eating >2 hamburgers a week had 20% higher probability of heart attack.
+
+- **Do hamburgers increase heart attacks?**
+
+- https://pollev.com/franciscorod726
+
+
+
+## Bigger flowers increase reproductive success
+
+- We found that plants with big flowers produced 30% more seeds...
+
+- **Do big flowers increase reproductive success?**
+
+- https://pollev.com/franciscorod726
+
+
+
+## Correlation vs Causation
+
+![](images/spurious-corr-margarine.png)
+
+http://tylervigen.com/spurious-correlations
+
+
+
+::: hide :::
+## Learning statistics through xkcd
+
+```{r out.height='3in', out.width='4in'}
+include_graphics("images/xkcd_correlation.png")
 ```
-
-
-# Descriptive statistics
-
-```{r descriptive, child = 'descriptive.Rmd'}
-```
-
-
-# Sampling, confidence intervals, likelihood and Bayesian inference
-
-```{r sampling, child = 'sampling.Rmd'}
-```
-
-
-# Experimental Design
-
-```{r expdesign, child = 'expdesign.Rmd'}
-```
-
-
-# Hypothesis testing
-
-```{r hyptesting, child = 'hyptesting.Rmd'}
-```
-
-
-# The importance of visualisation
-
-```{r vis, child="visualisation.Rmd"}
-```
-
-
-# Inference from observational studies
-
-```{r causalinf, child="causalinf.Rmd"}
-```
+:::
 
 
 
-## END
 
-![](images/CClogo.png)
-     
-Source code and materials: https://github.com/Pakillo/stats-intro    
-    
-  
-    
+
 
 
 
