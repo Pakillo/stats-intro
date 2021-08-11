@@ -5,7 +5,7 @@ output:
     incremental: yes
     fig_caption: no
     pandoc_args: ["--lua-filter=hideslide.lua"]
-fontsize: 10pt
+fontsize: 12pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
@@ -57,7 +57,7 @@ set.seed(88)
 
 
 
-## Measure trunk diameter (DBH) of 30 trees in your neighbourhood
+## Measure trunk diameter of 30 trees in your neighbourhood
 
 ```{r}
 include_graphics("images/measuring_diam.JPG")
@@ -78,9 +78,7 @@ treediam <- data.frame(site = rep(1:20, each = 30)) %>%
 treediam <- read.csv("treediam.csv")
 ```
 
-## Data summary
-
-```{r echo = TRUE}
+```{r echo=TRUE}
 summary(treediam)
 ```
 
@@ -103,11 +101,11 @@ hist(treediam$diam)
 
 \Large
 
-HOW WELL DO THESE VALUES
+How well do these values
 
-REPRESENT ACTUAL TREE DIAMETERS
+represent actual tree diameters
 
-IN YOUR NEIGHBOURHOOD?
+in your neighbourhood?
 
 \vspace{1cm}
 
@@ -125,11 +123,15 @@ https://pollev.com/franciscorod726
 
 - Did you include bark?
 
-- Did you measure with tape, forceps, by eye?
+- Did you measure with tape, caliper, by eye?
 
-- When did you measure: dawn, midday, night? (trees may get thinner w/ high evapotranspiration)
+- When did you measure: dawn, midday, night? 
 
-- Where did you measure? (differences among streets, species, etc)
+  - (trees may get thinner w/ high evapotranspiration)
+
+- Where did you measure? 
+
+  - (differences among streets, species, etc)
 
 
 ---
@@ -142,7 +144,7 @@ We decide **what to measure, when, where, and how**.
 
 Always consider: 
 
-**How well do numbers reflect what we are trying to measure?**
+**How well do data reflect what we are trying to measure?**
 
 
 
@@ -188,6 +190,8 @@ abline(v = median(vec), lwd = 5, col = "blue")
 abline(v = mean(vec), lwd = 5, col = "red")
 ```
 
+\footnotesize
+
 Median of c(2, 4, **6**, 8, 10) = 6
 
 Median of c(2, 4, 6, 8) = (4 + 6) / 2 = 5
@@ -198,7 +202,7 @@ Median of c(2, 4, 6, 8) = (4 + 6) / 2 = 5
 Most frequent value
 
 ```{r}
-vals <- c(2, 4, 4, 4, 4, 6, 6, 8, 10)
+vals <- c(3, 4, 4, 4, 4, 5, 5, 8, 10)
 hist(vals, breaks = 1:10, main = "Mode = 4", xlab = "")
 ```
 
@@ -215,8 +219,8 @@ ggplot(logvec) +
   geom_vline(xintercept = median(logvec$vec), lwd = 1, col = "blue") +
   labs(x = "", y = "") +
   annotate("text", x = 6, y = 230, label = "Mode", size = 6) +
-  annotate("text", x = 10, y = 20, label = "Median", colour = "blue", size = 6) +
-  annotate("text", x = 35, y = 20, label = "Mean", colour = "red", size = 6)
+  annotate("text", x = 10, y = 40, label = "Median", colour = "blue", size = 6) +
+  annotate("text", x = 35, y = 40, label = "Mean", colour = "red", size = 6)
 ```
 
 
@@ -229,6 +233,8 @@ ggplot(logvec) +
 hist(treediam$diam, main = "", xlab = "")
 ```
 
+\footnotesize
+
 Minimum = 9.2
 
 Maximum = 41.9
@@ -238,9 +244,7 @@ Range = 9.2, 41.9
 
 ## Quantiles
 
-Quartiles
-
-Percentiles
+Quartiles, Percentiles...
 
 ```{r}
 p75 <- quantile(logvec$vec, probs = 0.75)
@@ -248,8 +252,8 @@ ggplot(logvec) +
   geom_density(aes(vec), size = 2, fill = "grey") +
   theme_minimal() +
   geom_vline(xintercept = p75, colour = "red", lwd = 2) +
-  annotate("text", x = 50, y = 0.03, label = "Percentile 75", colour = "red", hjust = 0, size = 6) +
-  annotate("text", x = 50, y = 0.025, label = "75% of data to the left\n25% to the right", 
+  annotate("text", x = 45, y = 0.03, label = "Percentile 75", colour = "red", hjust = 0, size = 6) +
+  annotate("text", x = 45, y = 0.025, label = "75% of data to the left\n25% to the right", 
            colour = "red", size = 5, hjust = 0)
 ```
 
@@ -258,6 +262,8 @@ ggplot(logvec) +
 
 Average distance between data points and the mean
 
+\vspace{1cm}
+
 $SD = \sqrt {\dfrac {\sum \left( x-\mu\right) ^{2}}{n-1}}$
 
 
@@ -265,14 +271,16 @@ $SD = \sqrt {\dfrac {\sum \left( x-\mu\right) ^{2}}{n-1}}$
 
 ## In a Normal distribution
 
-![](images/gaussian.png)
-
-
+```{r}
+include_graphics("images/gaussian.png")
+```
 
 
 ## Standard Error of the Mean
 
 $SEM = \dfrac{SD} {\sqrt{n}}$
+
+\vspace{1cm}
 
 Estimates uncertainty (spread) of the parameter 'mean'
 
@@ -282,12 +290,14 @@ Estimates uncertainty (spread) of the parameter 'mean'
 :::::::::::::: {.columns align=center .onlytextwidth}
 
 ::: {.column width="50%"}
-```{r echo=FALSE, out.height='3.5in', out.width='2.3in'}
+```{r echo=FALSE, out.height='3in', out.width='2in'}
 include_graphics("images/SD-SEM.PNG")
 ```
 :::
 
 ::: {.column width="50%"}
+
+\footnotesize
 
 - SD quantifies scatter in population
 
@@ -304,13 +314,16 @@ include_graphics("images/SD-SEM.PNG")
 
 
 
-## Coefficient of Variation
+## Coefficient of Variation 
+
+\footnotesize
+
+Facilitates comparing spread of distributions with different means
 
 $CV = \dfrac{SD} {mean}$
 
-Facilitates comparing the spread of distributions with very different means
 
-```{r}
+```{r out.width="80%"}
 d1 <- rnorm(100, 20, 5)
 d2 <- rnorm(100, 100, 5)
 df <- data.frame(d1 = d1, d2 = d2)
@@ -333,7 +346,7 @@ ggplot(df) +
 
 :::::::::::::: {.columns align=center .onlytextwidth}
 
-::: {.column width="60%"}
+::: {.column width="70%"}
 ### Central tendency / location
 
   - mean (average)
@@ -350,15 +363,15 @@ ggplot(df) +
   - quantiles 
       (quartiles, percentiles...)
 
-  - standard deviation: 
+  - standard deviation
 
-  - standard error of the mean:
+  - standard error of the mean
 
-  - coefficient of variation (CV = SD / mean)
+  - coefficient of variation 
 
 :::
 
-::: {.column width="40%" align=top}
+::: {.column width="30%" align=top}
 ```{r out.width='1in', out.height='1in'}
 hist(treediam$diam)
 ```
