@@ -1,5 +1,5 @@
 ---
-title: "Sampling, confidence intervals, and Bayesian inference"
+title: "Sampling, confidence intervals, likelihood and Bayesian inference"
 output:
   binb::metropolis:
     incremental: yes

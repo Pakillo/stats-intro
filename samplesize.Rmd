@@ -5,7 +5,7 @@ output:
     incremental: yes
     fig_caption: no
     pandoc_args: ["--lua-filter=hideslide.lua"]
-fontsize: 10pt
+fontsize: 12pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
@@ -49,9 +49,12 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ---
 
-> The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use
+\tiny [H. Stern / A. Gelman](https://statmodeling.stat.columbia.edu/2018/08/07/important-aspect-statistical-analysis-not-data-data-use-survey-adjustment-edition)
 
-[H. Stern / A. Gelman](https://statmodeling.stat.columbia.edu/2018/08/07/important-aspect-statistical-analysis-not-data-data-use-survey-adjustment-edition/)
+\vspace{1cm}
+\normalsize
+
+> The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use
 
 
 
@@ -66,14 +69,14 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 [![](images/lowSS_noise.PNG)](https://video.twimg.com/tweet_video/DifncYiX0AEnn19.mp4)
 
-https://twitter.com/ajstewart_lang/status/1020038488278945797
+\tiny https://twitter.com/ajstewart_lang/status/1020038488278945797
 
 
 ## Low sample sizes may bias inferences about population
 
 ![](images/regression_pop_vs_sample.PNG)
 
-http://statisticalgate.com/regression-simulation/
+\tiny http://statisticalgate.com/regression-simulation/
 
 
 ## Low sample sizes may bias inferences
@@ -82,7 +85,7 @@ See [*The evolution of correlations*](http://vimeo.com/57127001)
 
 **Stopping rules**
 
-```{r echo=FALSE, out.height='3in', out.width='3in'}
+```{r echo=FALSE, out.height='2.5in', out.width='2.5in'}
 include_graphics("images/ssize-pvalue.png")
 ```
 
@@ -100,14 +103,20 @@ include_graphics("images/ssize-pvalue.png")
 
 ## Sample size estimation
 
+\footnotesize
+
+::: nonincremental :::
 Calculating sample size for Gaussian (Normal) response model:
 
   - expected mean: 30
   - expected sd: 10
   - 10 parameters (predictors)
   - expected R-squared: 0.2
+:::
+  
+\tiny
 
-```{r echo = TRUE}
+```{r echo = TRUE, tinycode = TRUE}
 library(pmsampsize)
 pmsampsize(type = "c", parameters = 10, intercept = 30, sd = 10, rsquared = 0.2)
 ```
@@ -115,13 +124,19 @@ pmsampsize(type = "c", parameters = 10, intercept = 30, sd = 10, rsquared = 0.2)
 
 ## Sample size estimation
 
+\footnotesize
+
+::: nonincremental :::
 Calculating sample size for binary response model:
 
   - expected prevalence: 0.1
   - 20 parameters (predictors)
   - expected R-squared: 0.2
+:::
 
-```{r echo = TRUE}
+\tiny 
+
+```{r echo = TRUE, tinycode = TRUE}
 library(pmsampsize)
 pmsampsize(type = "b", parameters = 20, prevalence = 0.1, rsquared = 0.2)
 ```
