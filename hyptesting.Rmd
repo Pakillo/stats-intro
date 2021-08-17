@@ -84,11 +84,29 @@ https://pollev.com/franciscorod726
 
 - Very complicated concept: even statisticians fail to describe it well.
 
-- Probability of observing data as or more extreme than these *if H0 was true*.
+- Probability of observing data as or more extreme than these *if every model assumption were correct*
 
-- **Low P-value**: data unlikely if H0 was true.
+- What assumptions?
 
-- **Large P-value**: data not unusual if H0 was true.
+  - Null hypothesis is true
+  
+  - No uncontrolled sources of bias (confounding, p-hacking, programming error, etc)
+  
+
+
+## How to interpret P-values
+
+- **Low P-value**: data unlikely if every model assumption (including H0) were true.
+
+- **Large P-value**: data not unusual if every model assumption (including H0) were true.
+
+- A very small P-value does not tell us which model assumption is incorrect:
+
+  - Could be that H0 is not true
+  
+  - But also that some auxiliary assumption is not true (e.g. sampling not random, p-hacking...)
+  
+- See [Greenland et al 2016](https://doi.org/10.1007/s10654-016-0149-3)
 
 
 
