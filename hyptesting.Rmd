@@ -90,7 +90,7 @@ https://pollev.com/franciscorod726
 
   - Null hypothesis is true
   
-  - No uncontrolled sources of bias (confounding, p-hacking, programming error, etc)
+  - No uncontrolled sources of bias (measurement or programming error, p-hacking, etc)
   
 
 
@@ -104,9 +104,18 @@ https://pollev.com/franciscorod726
 
   - Could be that H0 is not true
   
-  - But also that some auxiliary assumption is not true (e.g. sampling not random, p-hacking...)
+  - But also that some auxiliary assumption is not true (e.g. sampling not random, measurement error, p-hacking...)
   
 - See [Greenland et al 2016](https://doi.org/10.1007/s10654-016-0149-3)
+
+
+## For example
+
+- A [famous experiment](https://peerj.com/blog/post/115284880344/inferential-statistics-p-values-and-the-quest-to-evaluate-evidence-and-hypotheses/) found neutrinos faster than light 
+
+- p-value < 10^-7^ -> reject null hypothesis of equal speed
+
+- In reality, measurement error (loose cable)
 
 
 
