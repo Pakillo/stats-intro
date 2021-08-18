@@ -355,9 +355,7 @@ abline(lm(y~x),lwd=2)
 
 - Good read: [*significantly misleading*](https://web.archive.org/web/20150911003128/https://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
 
-- My suggestion: avoid significant/not significant (perhaps p-values too)
-
-- Beyond significance, look at *effect sizes* and their uncertainty.
+- Beyond significant/not significant, look at *effect sizes* and their uncertainty.
 
 
 
