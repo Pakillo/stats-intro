@@ -339,6 +339,32 @@ include_graphics("images/bigSS.png")
 
 ## Statistically significant != biologically important
 
+```{r out.width="30%"}
+include_graphics("images/pvalue-effsize.png")
+```
+
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="50%"}
+```{r out.width="100%"}
+include_graphics("images/pvalue-effsize-A.png")
+```
+:::
+
+::: {.column width="50%" }
+```{r out.width="100%"}
+include_graphics("images/pvalue-effsize-B.png")
+```
+:::
+::::::::::::::
+
+\tiny https://twitter.com/weinberz/status/1422405165236178947?s=20
+
+
+
+## Statistically significant != biologically important
+
 ```{r}
 set.seed(1)
 x <- rnorm(10000,0,1)
@@ -363,10 +389,12 @@ abline(lm(y~x),lwd=2)
 
 ## 'Not significant' does NOT mean 'there is no effect'
 
+**Absence of evidence != Evidence of absence**
+
 ![](images/CIs.png)
 
 
-- **Absence of evidence != Evidence of absence**
+
 
 
 
