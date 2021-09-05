@@ -348,13 +348,13 @@ include_graphics("images/pvalue-effsize.png")
 
 ::: {.column width="50%"}
 ```{r out.width="100%"}
-include_graphics("images/pvalue-effsize-A.png")
+include_graphics("images/pvalue-effsize-A.jpeg")
 ```
 :::
 
 ::: {.column width="50%" }
 ```{r out.width="100%"}
-include_graphics("images/pvalue-effsize-B.png")
+include_graphics("images/pvalue-effsize-B.jpeg")
 ```
 :::
 ::::::::::::::
