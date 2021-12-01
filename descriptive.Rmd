@@ -51,7 +51,7 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ```{r}
 library(ggplot2)
-
+library(dplyr)
 set.seed(88)
 ```
 
@@ -63,12 +63,12 @@ set.seed(88)
 include_graphics("images/measuring_diam.JPG")
 ```
 
-```{r echo=FALSE}
-library(dplyr)
+```{r echo=FALSE, eval=FALSE}
 treediam <- data.frame(site = rep(1:20, each = 30)) %>% 
   group_by(site) %>% 
   mutate(tree = seq_len(30),
          diam = round(rnorm(30, 25, 5), 1))
+readr::write_csv(treediam, "treediam.csv")
 ```
 
 

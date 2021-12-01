@@ -218,6 +218,12 @@ http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.htm
 
 # NHST and p-values:\newline common pitfalls
 
+
+---
+
+\Huge A significant p-value\newline does NOT mean\newline we found a true difference
+
+
 ## A significant p-value does not mean we found a true difference
 
 Particularly with low sample sizes
@@ -290,7 +296,7 @@ p2 <- ggplot(samp) +
   coord_cartesian(xlim = c(0, 100)) +
   labs(title = "Sampling 500 individuals from each group and making t-test",
        y = "count") +
-  annotate("text", x = 75, y = 80, hjust = 0, size = 6,
+  annotate("text", x = 75, y = 80, hjust = 0, size = 8,
            label = paste0("p = ", round(tt$p.value, 3)))
 
 p1/p2
@@ -327,6 +333,10 @@ Same real difference is detected as **significant or not depending on sample siz
 
 ![](images/smallSS.png)
 
+---
+
+\Huge
+Statistically significant\newline !=\newline biologically important
 
 ## Statistically significant != biologically important
 
@@ -339,7 +349,7 @@ include_graphics("images/bigSS.png")
 
 ## Statistically significant != biologically important
 
-```{r out.width="30%"}
+```{r out.width="40%", fig.align='left'}
 include_graphics("images/pvalue-effsize.png")
 ```
 
@@ -381,26 +391,85 @@ abline(lm(y~x),lwd=2)
 
 - Good read: [*significantly misleading*](https://web.archive.org/web/20150911003128/https://www.statslife.org.uk/the-statistics-dictionary/1000-the-statistics-dictionary-significantly-misleading)
 
-- Beyond significant/not significant, look at *effect sizes* and their uncertainty.
+- Beyond significant/not significant, look at **effect sizes and their uncertainty**.
 
 
 
+
+
+---
+
+\Huge
+'Not significant'\newline does NOT mean\newline 'there is no effect'
 
 
 ## 'Not significant' does NOT mean 'there is no effect'
 
-**Absence of evidence != Evidence of absence**
+```{r out.width="100%"}
 
-![](images/CIs.png)
+set.seed(8)
+xdist <- rnorm(1000, 70, 15)
+ydist <- rnorm(1000, 50, 15)
+dist <- data.frame(group = rep(c("A", "B"), each = 1000), 
+                   value = c(xdist, ydist))
+p1 <- ggplot(dist) +
+  geom_density(aes(value, fill = group), alpha = 0.3) +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 100)) +
+  labs(title = "Two groups have different distribution") 
+
+xsamp <- sample(xdist, 10)
+ysamp <- sample(ydist, 10)
+samp <- data.frame(group = rep(c("A", "B"), each = 10),
+                   value = c(xsamp, ysamp))
+
+tt <- t.test(xsamp, ysamp)
+
+p2 <- ggplot(samp) +
+  geom_histogram(aes(value, fill = group)) +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 100)) +
+  labs(title = "Sampling 10 individuals from each group and making t-test",
+       y = "count") +
+  annotate("text", x = 75, y = 3, hjust = 0, size = 8,
+           label = paste0("p = ", round(tt$p.value, 3)))
+
+p1/p2
+
+```
 
 
+## 'Not significant' does NOT mean 'there is no effect'
 
+```{r}
+p1 <- ggplot(dist) +
+  geom_violin(aes(group, value, fill = group), 
+              alpha = 0.3, show.legend = FALSE) +
+  theme_minimal(base_size = 15) +
+  labs(title = "True distributions",
+  subtitle = "Difference of means = 20", x = "", y = "") +
+  coord_cartesian(ylim = c(0, 120))
 
+p2 <- ggplot(samp) +
+  geom_violin(aes(group, value, fill = group), 
+              alpha = 0.3, show.legend = FALSE) +
+  theme_minimal(base_size = 15) +
+  labs(title = "Samples",
+  subtitle = paste0("p = ", round(tt$p.value, 3)),
+  y = "", x = "") +
+  coord_cartesian(ylim = c(0, 120))
 
+p1 + p2
 
-## Failure to reject H0 != H0 is true
+```
 
-![](images/CIoverlap.png)
+---
+
+\Large
+Failure to reject H0 != H0 is true
+
+Absence of evidence != Evidence of absence
+
 
 
 ## p-value > 0.05?
@@ -412,13 +481,26 @@ abline(lm(y~x),lwd=2)
 
 ## Is it safe to allow right turn with red lights?
 
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
 - Right turn not allowed: 308 accidents
 
 - Right turn allowed: 337 accidents
 
 - No *significant* difference, hence safe
 
+- Failure to reject H0 does NOT mean H0 is true!
+
 - Misinterpretation of underpowered study cost lives
+:::
+
+::: {.column width="30%" }
+```{r echo=FALSE}
+include_graphics("images/turn-red.png")
+```
+:::
+::::::::::::::
 
 https://www.statisticsdonewrong.com/power.html#the-wrong-turn-on-red
 
