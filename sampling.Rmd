@@ -154,9 +154,9 @@ https://pollev.com/franciscorod726
 
 ## Bayesian inference: prior, posterior, and likelihood
 
-$P(H|D) \propto P(D|H) \cdot P(H)$
+$P(Unknown|Data) \propto P(Data|Unknown) \times P(Unknown)$
 
-$Posterior \propto Likelihood \cdot Prior$
+$Posterior \propto Likelihood \times Prior$
 
 ```{r echo = FALSE, results='hide'}
 
