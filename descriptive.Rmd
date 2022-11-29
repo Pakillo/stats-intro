@@ -74,7 +74,7 @@ readr::write_csv(treediam, "treediam.csv")
 
 ## Read data
 
-```{r echo = TRUE, eval=FALSE}
+```{r echo = TRUE, eval=TRUE}
 treediam <- read.csv("treediam.csv")
 ```
 
@@ -136,6 +136,15 @@ https://pollev.com/franciscorod726
 
 ---
 
+```{r out.width="80%"}
+include_graphics("images/Truth_VisualizeValue.png")
+```
+
+\tiny 
+https://visualizevalue.com/
+
+---
+
 Data are hardly ever objective. 
 
 We decide **what to measure, when, where, and how**.
@@ -147,6 +156,7 @@ Always consider:
 **How well do data reflect what we are trying to measure?**
 
 
+# Describing your data
 
 ## How would you describe this distribution?
 
@@ -336,9 +346,9 @@ ggplot(df) +
   theme(axis.text.y = element_blank(),
         axis.text.x = element_text(size = 14)) +
   annotate("text", x = 30, y = 0.07, 
-           label = "Mean = 20\nSD = 5\nCV = 0.25", hjust = 0, size = 5) +
+           label = "Mean = 20\nSD = 5\nCV = 0.25", hjust = 0, size = 7) +
     annotate("text", x = 65, y = 0.03, 
-           label = "Mean = 100\nSD = 5\nCV = 0.05", hjust = 0, size = 5)
+           label = "Mean = 100\nSD = 5\nCV = 0.05", hjust = 0, size = 7)
 ```
 
 
