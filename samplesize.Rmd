@@ -49,12 +49,11 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ---
 
-\tiny [H. Stern / A. Gelman](https://statmodeling.stat.columbia.edu/2018/08/07/important-aspect-statistical-analysis-not-data-data-use-survey-adjustment-edition)
+> The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use
 
 \vspace{1cm}
-\normalsize
 
-> The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use
+\tiny [H. Stern / A. Gelman](https://statmodeling.stat.columbia.edu/2018/08/07/important-aspect-statistical-analysis-not-data-data-use-survey-adjustment-edition)
 
 
 
@@ -76,7 +75,9 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ![](images/regression_pop_vs_sample.PNG)
 
-\tiny http://statisticalgate.com/regression-simulation/
+
+<!-- \tiny http://statisticalgate.com/regression-simulation/ -->
+
 
 
 ## Low sample sizes may bias inferences

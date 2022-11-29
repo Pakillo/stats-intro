@@ -403,7 +403,7 @@ abline(lm(y~x),lwd=2)
 'Not significant'\newline does NOT mean\newline 'there is no effect'
 
 
-## 'Not significant' does NOT mean 'there is no effect'
+## 'Not significant' does NOT mean 'they are equal'
 
 ```{r out.width="100%"}
 
@@ -521,6 +521,7 @@ http://dx.doi.org/10.1198/000313006X152649
 include_graphics("images/xkcd_testing.png")
 ```
 
+\tiny https://xkcd.com/882
 
 ## How to make your results significant: *p-hacking*
 
@@ -550,12 +551,12 @@ include_graphics("images/phacking_Motulski.jpg")
 
 https://www.shinyapps.org/apps/p-hacker/
 
+https://shiny.psy.lmu.de/felix/ShinyPHack/
 
-::: hide :::
+
 ## How to make your results significant: *p-hacking*
 
 https://www.youtube.com/watch?v=ZaNtz76dNSI
-:::
 
 
 ## ASA statement on p-values
