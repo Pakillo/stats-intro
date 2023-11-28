@@ -285,3 +285,36 @@ title("Tree diameter in your neighbourhood (n = 100)")
 
 - Uncertainty / Propagate errors
 
+
+
+# Uncertainty!
+
+## Even with same data, different teams reach different conclusions!
+
+How does sibling competition affect nestling growth in blue tits?
+
+Most teams found negative effect, but large variation in effect size. Some teams no or positive effect
+
+```{r out.width="50%"}
+knitr::include_graphics("images/many_analysts_bluetit.png")
+```
+
+
+## 73 teams testing the same hypothesis with the same data
+
+```{r out.width="60%", fig.align='left'}
+include_graphics("images/Breznau_PNAS.png")
+```
+
+```{r out.width="50%"}
+include_graphics("images/Breznau_PNAS_fig.jpg")
+```
+
+"This reveals a **universe of uncertainty** that remains hidden when considering a single study in isolation"
+
+"These results call for greater **epistemic humility** and **clarity in reporting** scientific findings"
+
+\raggedright
+\tiny [Breznau et al 2022](https://doi.org/10.1073/pnas.2203150119)
+\raggedleft
+
