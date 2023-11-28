@@ -260,6 +260,8 @@ title("Tree diameter in your neighbourhood (n = 100)")
 
 ## More apps to introduce Bayesian inference
 
+- [Wagenmaker's first lesson in Bayesian inference](https://shiny.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd)
+
 - [Bayesian Demo](https://micl.shinyapps.io/prior2post/)
 
 - [Bayesian inference for a population mean](https://patrickbarks.shinyapps.io/bayes/)
