@@ -93,6 +93,15 @@ https://pollev.com/franciscorod726
   - No uncontrolled sources of bias (measurement or programming error, p-hacking, etc)
   
 
+## A very small p-value does NOT mean H0 is automatically false
+
+- A [famous experiment](https://peerj.com/blog/post/115284880344/inferential-statistics-p-values-and-the-quest-to-evaluate-evidence-and-hypotheses/) found neutrinos faster than light 
+
+- p-value < 10^-7^ -> reject null hypothesis of equal speed
+
+- In reality, measurement error (loose cable)
+
+
 
 ## How to interpret P-values
 
@@ -109,13 +118,7 @@ https://pollev.com/franciscorod726
 - See [Greenland et al 2016](https://doi.org/10.1007/s10654-016-0149-3)
 
 
-## For example
 
-- A [famous experiment](https://peerj.com/blog/post/115284880344/inferential-statistics-p-values-and-the-quest-to-evaluate-evidence-and-hypotheses/) found neutrinos faster than light 
-
-- p-value < 10^-7^ -> reject null hypothesis of equal speed
-
-- In reality, measurement error (loose cable)
 
 
 
@@ -133,7 +136,7 @@ https://pollev.com/franciscorod726
 
 
 
-## Are differences *significant*?
+## Are differences "significant"?
 
 Common practice:
 
@@ -143,7 +146,7 @@ Common practice:
 
 - (which is **NOT** the same as 'H0 is true')
 
-- **CAUTION:** P-value is continuous. We must **avoid binary decisions** based on **arbitrary thresholds**.
+- **CAUTION:** P-value is continuous. We'd rather **avoid binary decisions** based on **arbitrary thresholds**.
 
 . . . 
 
