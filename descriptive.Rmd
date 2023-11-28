@@ -309,6 +309,8 @@ include_graphics("images/SD-SEM.PNG")
 
 \footnotesize
 
+- https://gallery.shinyapps.io/sampling_and_stderr/
+
 - SD quantifies scatter in population
 
 - SEM quantifies uncertainty in parameter estimate (population mean)
@@ -316,8 +318,6 @@ include_graphics("images/SD-SEM.PNG")
 - SEM = SD/sqrt(n)
 
 - SEM decreases with sample size (mean better known), SD does not.
-
-- https://gallery.shinyapps.io/sampling_and_stderr/
 
 :::
 ::::::::::::::
