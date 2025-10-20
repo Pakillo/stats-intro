@@ -61,12 +61,28 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ## Bigger flowers increase reproductive success
 
+```{r out.width='2.5in'}
+flower.size <- runif(100, 5, 20)
+N.seeds <- round(rnorm(100, 5*flower.size, 10))
+plot(flower.size, N.seeds, las = 1, cex.lab = 2)
+```
+
 - We found that plants with big flowers produced 30% more seeds...
 
 - **Do big flowers increase reproductive success?**
 
 - https://pollev.com/franciscorod726
 
+
+## Does coming to class improve students' performance?
+
+```{r out.width='2.5in'}
+attendance <- runif(100, 0, 90)
+mark <- rnorm(100, 0.1*attendance, 1)
+plot(attendance, mark, las = 1, cex.lab = 2, xlab = "% classes attended", ylab = "Final grade")
+```
+
+- https://pollev.com/franciscorod726
 
 
 ## Correlation vs Causation
