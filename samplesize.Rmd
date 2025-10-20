@@ -74,6 +74,8 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 \tiny https://twitter.com/ajstewart_lang/status/1020038488278945797
 
+\normalsize Play yourself [here](http://pakillo.github.io/LM-GLM-GLMM-intro/lowss_groups.html)
+
 
 ## Low sample sizes may bias inferences about population
 
