@@ -309,6 +309,11 @@ knitr::include_graphics("images/base_rate.png")
 
 https://seeing-theory.brown.edu/bayesian-inference/index.html#section3
 
+## The base rate fallacy
+
+- [Matthews 2025](https://doi.org/10.1093/jrssig/qmaf044)
+
+- [Statistics done wrong](https://www.statisticsdonewrong.com/p-value.html#the-base-rate-fallacy-in-medical-testing)
 
 # Uncertainty!
 
