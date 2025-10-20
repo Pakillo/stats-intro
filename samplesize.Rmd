@@ -49,7 +49,9 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ---
 
-> The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use
+\LARGE
+
+*The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use*
 
 \vspace{1cm}
 
@@ -61,10 +63,12 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 - Many studies have **too low sample sizes**. 
 
-- Low sample sizes miss subtle effects, but also [**prone to bias**](http://science.sciencemag.org/content/355/6325/584.summary).
+- Low sample sizes **miss subtle effects**, but also **prone to bias**.
+
+- The **fallacy** of assuming that which does not kill statistical significance makes it stronger ([Loken & Gelman 2017](http://science.sciencemag.org/content/355/6325/584.summary)).
 
 
-## Low sample sizes very sensitive to random noise
+## Low sample sizes are very sensitive to random noise
 
 [![](images/lowSS_noise.PNG)](https://video.twimg.com/tweet_video/DifncYiX0AEnn19.mp4)
 
@@ -75,6 +79,7 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 
 ![](images/regression_pop_vs_sample.PNG)
 
+\tiny Source: statisticalgate.com
 
 <!-- \tiny http://statisticalgate.com/regression-simulation/ -->
 
@@ -93,9 +98,11 @@ include_graphics("images/ssize-pvalue.png")
 
 ## Sample size estimation
 
-- Plan model/statistical analysis **before** data collection.
+- **Plan** model/statistical analysis **before** data collection.
 
 - **Do simulations**. Power/Sample size/Precision analyses (e.g. see papers like [this](https://doi.org/10.1136/bmj.m441) & [this](https://doi.org/10.1111/2041-210X.12504), or software like [this](https://cran.r-project.org/package=pmsampsize) & [this](https://precisely.malco.io/)).
+
+- **Justify** your sample size (precision, minimal effect size...). See [Lakens' book](https://lakens.github.io/statistical_inferences/08-samplesizejustification.html).
 
 - Plan to have at least **10-30 observations per predictor**.
 
@@ -139,7 +146,7 @@ Calculating sample size for binary response model:
 
 ```{r echo = TRUE, tinycode = TRUE}
 library(pmsampsize)
-pmsampsize(type = "b", parameters = 20, prevalence = 0.1, rsquared = 0.2)
+pmsampsize(type = "b", parameters = 20, prevalence = 0.1, nagrsquared = 0.2)
 ```
 
 

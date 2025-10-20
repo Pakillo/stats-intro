@@ -68,7 +68,9 @@ Discuss with partner (5')
 
 - Replication is key: we need several samples.
 
-- How many? As much as you can! See [Gelman & Carlin 2014](https://doi.org/10.1177/1745691614551642).
+- How many? The more the better! See [Gelman & Carlin 2014](https://doi.org/10.1177/1745691614551642).
+
+- But there are trade-offs. See [Lakens' sample size justification](https://lakens.github.io/statistical_inferences/08-samplesizejustification.html)
 
 
 ```{r child="samplesize.Rmd"}
@@ -114,8 +116,13 @@ Discuss with partner (5')
 
 ## To read more
 
-- [Ruxton & Colegrave. Experimental Design for the Life Sciences. OUP](http://global.oup.com/ukhe/product/experimental-design-for-the-life-sciences-9780198717355?cc=es&lang=en&)
+- [Ruxton & Colegrave: Experimental Design for the Life Sciences. OUP](http://global.oup.com/ukhe/product/experimental-design-for-the-life-sciences-9780198717355?cc=es&lang=en&)
 
+- [Lakens: Improving your statistical inferences](https://lakens.github.io/statistical_inferences/)
+
+- [DeclareDesign](https://declaredesign.org/)
+
+<!-- - [Tanaka: The grammar of experimental design](https://emitanaka.org/edibble-book/) -->
 
 
 
