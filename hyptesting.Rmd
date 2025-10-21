@@ -102,6 +102,43 @@ https://pollev.com/franciscorod726
 - In reality, measurement error (loose cable)
 
 
+## Testing a new fertiliser: Does it work?
+
+10 treatment, 10 control plots
+
+Crop biomass (treatment): $10 kg \pm 2 kg$
+
+Crop biomass (control): $6 kg \pm 2 kg$
+
+\footnotesize
+
+```{r}
+set.seed(123)
+tr <- rnorm(10, 10, 2)
+ct <- rnorm(10, 6, 2)
+t.test(tr, ct)
+```
+
+
+
+## Testing a new fertiliser: Does it work?
+
+10 treatment, 10 control plots
+
+Crop biomass (treatment): $10 kg \pm 2 kg$
+
+Crop biomass (control): $9 kg \pm 2 kg$
+
+\footnotesize
+
+```{r}
+set.seed(123)
+tr <- rnorm(10, 10, 2)
+ct <- rnorm(10, 9, 2)
+t.test(tr, ct)
+```
+
+
 
 ## How to interpret P-values
 
@@ -146,7 +183,7 @@ Common practice:
 
 - (which is **NOT** the same as 'H0 is true')
 
-- **CAUTION:** P-value is continuous. We'd rather **avoid binary decisions** based on **arbitrary thresholds**.
+- **CAUTION:** P-value is continuous. We'd rather **avoid binary decisions** based on **arbitrary thresholds**?
 
 . . . 
 
@@ -155,6 +192,21 @@ knitr::include_graphics("images/nature_significance.PNG")
 ```
 
 \footnotesize https://doi.org/10.1038/d41586-019-00857-9
+
+
+## S (Surprise) values as alternative to p-values
+
+```{r eval=FALSE}
+S = -log2(p.value)
+```
+
+- A p-value of 0.05 is as surprising as getting `r round(-log2(0.05), 1)` heads in a row when flipping a coin.
+
+- A p-value of 0.01 is as surprising as getting `r round(-log2(0.01), 1)` heads in a row when flipping a coin.
+
+- A p-value of 0.001 is as surprising as getting `r round(-log2(0.001), 1)` heads in a row when flipping a coin.
+
+\tiny [Rafi & Greenland 2020](https://doi.org/10.1186/s12874-020-01105-9)
 
 
 
@@ -216,7 +268,7 @@ https://pollev.com/franciscorod726
 
 http://rpsychologist.com/d3/NHST/
 
-http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html
+https://lakens.github.io/statistical_inferences/01-pvalue.html
 
 
 # NHST and p-values:\newline common pitfalls
@@ -321,12 +373,13 @@ With low sample size (power),\newline significant p-values\newline are most like
 
 ## P-value depends on sample size
 
-```{r }
+```{r out.width='80%'}
 include_graphics("images/pvalue_SS_Motulski.jpg")
 ```
 
-\footnotesize https://doi.org/10.1002/prp2.93
+\tiny https://doi.org/10.1002/prp2.93
 
+\normalsize Try yourself [here](https://pakillo.github.io/LM-GLM-GLMM-intro/ss_pval.html)!
 
 
 
@@ -505,7 +558,7 @@ include_graphics("images/turn-red.png")
 :::
 ::::::::::::::
 
-https://www.statisticsdonewrong.com/power.html#the-wrong-turn-on-red
+\tiny https://www.statisticsdonewrong.com/power.html#the-wrong-turn-on-red
 
 
 
@@ -514,7 +567,7 @@ https://www.statisticsdonewrong.com/power.html#the-wrong-turn-on-red
 
 ![](images/gelman_signif.png)
 
-http://dx.doi.org/10.1198/000313006X152649
+\tiny https://dx.doi.org/10.1198/000313006X152649
 
 
 
@@ -575,10 +628,11 @@ p-value passes a specific threshold**.
 
 - By itself, a p-value does NOT provide a good **measure of evidence** regarding a model or hypothesis.
 
+\tiny 
 
 https://doi.org/10.1080/00031305.2016.1154108
 
-
+See also https://lakens.github.io/statistical_inferences/01-pvalue.html
 
 
 
@@ -591,13 +645,15 @@ https://doi.org/10.1080/00031305.2016.1154108
 include_graphics("images/Greenland.PNG")
 ```
 
-https://doi.org/10.1007/s10654-016-0149-3
+\tiny https://doi.org/10.1007/s10654-016-0149-3
 
 
 
 ## Good read
 
 ![](images/steel_paper.png)
+
+\tiny 
 
 https://doi.org/10.1890/ES13-00160.1
 
@@ -620,7 +676,7 @@ Aim for estimation of effects and their uncertainty (SE, CI...)
 
 ![](images/cumming.png)
 
-http://dx.doi.org/10.1177/0956797613504966
+\tiny https://dx.doi.org/10.1177/0956797613504966
 
 
 
@@ -630,7 +686,7 @@ http://dx.doi.org/10.1177/0956797613504966
 include_graphics("images/science_process.jpg")
 ```
 
-https://doi.org/10.1242/jeb.104976
+\tiny https://doi.org/10.1242/jeb.104976
 
 
 
