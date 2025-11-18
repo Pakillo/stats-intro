@@ -63,6 +63,12 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 ```
 
 
+# The importance of visualisation
+
+```{r vis, child="visualisation.Rmd"}
+```
+
+
 # Sampling, confidence intervals, likelihood and Bayesian inference
 
 ```{r sampling, child = 'sampling.Rmd'}
@@ -75,22 +81,18 @@ knit_hooks$set(tinycode = function(before, options, envir) {
 ```
 
 
+# Inference from observational studies
+
+```{r causalinf, child="causalinf.Rmd"}
+```
+
+
 # Hypothesis testing
 
 ```{r hyptesting, child = 'hyptesting.Rmd'}
 ```
 
 
-# The importance of visualisation
-
-```{r vis, child="visualisation.Rmd"}
-```
-
-
-# Inference from observational studies
-
-```{r causalinf, child="causalinf.Rmd"}
-```
 
 
 

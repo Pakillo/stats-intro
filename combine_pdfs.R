@@ -8,6 +8,6 @@ pdftools::pdf_combine(c(
   "visualisation.pdf",
   "causalinf.pdf",
   "hyptesting.pdf"),
-  output = "stats-intro.pdf")
+  output = "stats-intro-master.pdf")
 
 # pdftools::pdf_subset("stats-intro-master.pdf", output = "portada.pdf")

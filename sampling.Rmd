@@ -301,13 +301,24 @@ title("Tree diameter in your neighbourhood (n = 100)")
 - What's the probability that you have COVID?
 
 
-## The probability that you have COVID is 0.06!
+---
+
+\Large
+
+The probability 
+
+that you have COVID 
+
+is 0.04!
+
+
+## The probability that you have COVID is 0.04!
 
 ```{r}
 knitr::include_graphics("images/base_rate.png")
 ```
 
-https://seeing-theory.brown.edu/bayesian-inference/index.html#section3
+https://seeing-theory.brown.edu/bayesian-inference/index.html
 
 ## The base rate fallacy
 
@@ -317,7 +328,7 @@ https://seeing-theory.brown.edu/bayesian-inference/index.html#section3
 
 # Uncertainty!
 
-## Even with same data, different teams reach different conclusions!
+## Same data, different teams reach different conclusions!
 
 How does sibling competition affect nestling growth in blue tits?
 
